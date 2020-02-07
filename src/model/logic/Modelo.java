@@ -1,72 +1,73 @@
 package model.logic;
 
-import model.data_structures.ArregloDinamico;
-import model.data_structures.IArregloDinamico;
+import java.io.FileNotFoundException;
+import java.io.FileReader;
+import java.text.ParseException;
+import java.text.SimpleDateFormat;
+import java.util.ArrayList;
+import java.util.List;
+
+import com.google.gson.JsonArray;
+import com.google.gson.JsonElement;
+import com.google.gson.JsonParser;
+import com.google.gson.stream.JsonReader;
+
+import model.Comparendo;
 
 /**
  * Definicion del modelo del mundo
  *
  */
 public class Modelo {
-	/**
-	 * Atributos del modelo del mundo
-	 */
-	private IArregloDinamico datos;
 	
-	/**
-	 * Constructor del modelo del mundo con capacidad predefinida
-	 */
-	public Modelo()
-	{
-		datos = new ArregloDinamico(7);
-	}
+	public static String PATH = "./data/comparendos_dei_2018_small.geojson";
+//	public static String PATH = "./data/comparendos_dei_2018.geojson";
 	
-	/**
-	 * Constructor del modelo del mundo con capacidad dada
-	 * @param tamano
-	 */
-	public Modelo(int capacidad)
-	{
-		datos = new ArregloDinamico(capacidad);
-	}
 	
-	/**
-	 * Servicio de consulta de numero de elementos presentes en el modelo 
-	 * @return numero de elementos presentes en el modelo
-	 */
-	public int darTamano()
-	{
-		return datos.darTamano();
-	}
+	public List<Comparendo> cargarDatos() {
+		
+		List<Comparendo> datos = new ArrayList<>();
 
-	/**
-	 * Requerimiento de agregar dato
-	 * @param dato
-	 */
-	public void agregar(String dato)
-	{	
-		datos.agregar(dato);
-	}
-	
-	/**
-	 * Requerimiento buscar dato
-	 * @param dato Dato a buscar
-	 * @return dato encontrado
-	 */
-	public String buscar(String dato)
-	{
-		return datos.buscar(dato);
-	}
-	
-	/**
-	 * Requerimiento eliminar dato
-	 * @param dato Dato a eliminar
-	 * @return dato eliminado
-	 */
-	public String eliminar(String dato)
-	{
-		return datos.eliminar(dato);
-	}
+		JsonReader reader;
+		long start = System.currentTimeMillis();
+		try {
+			reader = new JsonReader(new FileReader(PATH));
+			JsonElement elem = JsonParser.parseReader(reader);
+			JsonArray e2 = elem.getAsJsonObject().get("features").getAsJsonArray();
+			
+			
+			SimpleDateFormat parser=new SimpleDateFormat("yyyy/MM/dd");
 
+			for(JsonElement e: e2) {
+				Comparendo c = new Comparendo();
+				c.OBJECTID = e.getAsJsonObject().get("properties").getAsJsonObject().get("OBJECTID").getAsInt();
+				
+				String s = e.getAsJsonObject().get("properties").getAsJsonObject().get("FECHA_HORA").getAsString();	
+				c.FECHA_HORA = parser.parse(s); 
+				
+				c.MEDIO_DETE = e.getAsJsonObject().get("properties").getAsJsonObject().get("MEDIO_DETE").getAsString();
+				c.CLASE_VEHI = e.getAsJsonObject().get("properties").getAsJsonObject().get("CLASE_VEHI").getAsString();
+				c.TIPO_SERVI = e.getAsJsonObject().get("properties").getAsJsonObject().get("TIPO_SERVI").getAsString();
+				c.INFRACCION = e.getAsJsonObject().get("properties").getAsJsonObject().get("INFRACCION").getAsString();
+				c.DES_INFRAC = e.getAsJsonObject().get("properties").getAsJsonObject().get("DES_INFRAC").getAsString();	
+				c.LOCALIDAD = e.getAsJsonObject().get("properties").getAsJsonObject().get("LOCALIDAD").getAsString();
 
+				c.longitud = e.getAsJsonObject().get("geometry").getAsJsonObject().get("coordinates").getAsJsonArray()
+						.get(0).getAsDouble();
+				
+				c.latitud = e.getAsJsonObject().get("geometry").getAsJsonObject().get("coordinates").getAsJsonArray()
+						.get(1).getAsDouble();
+
+				datos.add(c);
+			}
+
+		} catch (FileNotFoundException | ParseException e) {
+			e.printStackTrace();
+		}
+		long end = System.currentTimeMillis();
+
+		System.out.println("Tiempo de carga (s): " + (end-start)/1000.0);
+		return datos;	
+		
+	}
 }

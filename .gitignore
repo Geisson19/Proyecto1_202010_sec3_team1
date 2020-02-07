@@ -17,4 +17,5 @@ local.properties
 *.launch
 
 data/*
+!data/comparendos_dei_2018_small.geojson
 !data/.gitignore
