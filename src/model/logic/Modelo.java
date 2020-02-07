@@ -29,7 +29,6 @@ public class Modelo {
 		List<Comparendo> datos = new ArrayList<>();
 
 		JsonReader reader;
-		long start = System.currentTimeMillis();
 		try {
 			reader = new JsonReader(new FileReader(PATH));
 			JsonElement elem = JsonParser.parseReader(reader);
@@ -64,9 +63,6 @@ public class Modelo {
 		} catch (FileNotFoundException | ParseException e) {
 			e.printStackTrace();
 		}
-		long end = System.currentTimeMillis();
-
-		System.out.println("Tiempo de carga (s): " + (end-start)/1000.0);
 		return datos;	
 		
 	}
