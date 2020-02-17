@@ -1,11 +1,11 @@
-package model.logic;
+package model.data_structures;
 
 
-public class Cola<E> implements ICola{
+public class Cola<T extends Comparable<T>> implements ICola<T>{
 
-	private Node<E> primero;
+	private Node<T> primero;
 
-	private Node<E> ultimo;
+	private Node<T> ultimo;
 
 	private int tamano;
 
@@ -16,7 +16,7 @@ public class Cola<E> implements ICola{
 		tamano = 0;
 	}
 	
-	public void enqueue(E nuevo)
+	public void enqueue(T nuevo)
 	{
 		
 		if(ultimo == null)
@@ -26,7 +26,7 @@ public class Cola<E> implements ICola{
 		}
 		else
 		{
-			Node<E> nodo = new Node<>(nuevo, null);
+			Node<T> nodo = new Node<>(nuevo, null);
 			ultimo.cambiarSiguiente(nodo);
 			ultimo = nodo;
 		}
@@ -34,27 +34,27 @@ public class Cola<E> implements ICola{
 		
 	}
 
-	public E dequeue()
+	public T dequeue()
 	{
 		if(estaVacia()){
 			return null;
 		}
 		else{
-			E toReturn = primero.darElemento();
+			T toReturn = primero.darElemento();
 			primero = primero.darSiguiente();
 			tamano--;
 			return toReturn;
 		}
 	}
 
-	public E primeroNodo()
+	public T primeroNodo()
 	{
 		if(estaVacia())
 			return null;
 		return primero.darElemento();
 	}
 
-	public E ultimoNodo()
+	public T ultimoNodo()
 	{
 		if(estaVacia())
 			return null;

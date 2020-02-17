@@ -18,6 +18,10 @@
   </component>
   <component name="PropertiesComponent">
     <property name="RunOnceActivity.ShowReadmeOnStart" value="true" />
+    <property name="last_opened_file_path" value="$PROJECT_DIR$/../Proyecto1_202010" />
+    <property name="project.structure.last.edited" value="Modules" />
+    <property name="project.structure.proportion" value="0.0" />
+    <property name="project.structure.side.proportion" value="0.0" />
     <property name="settings.editor.selected.configurable" value="vcs.Git" />
   </component>
   <component name="SvnConfiguration">
@@ -38,9 +42,17 @@
       <screen x="0" y="0" width="1536" height="864" />
     </state>
     <state x="361" y="92" key="#Notifications/0.0.1536.864@0.0.1536.864" timestamp="1581899213646" />
-    <state x="277" y="76" key="SettingsEditor" timestamp="1581898933656">
+    <state x="549" y="188" key="FileChooserDialogImpl" timestamp="1581900270591">
       <screen x="0" y="0" width="1536" height="864" />
     </state>
-    <state x="277" y="76" key="SettingsEditor/0.0.1536.864@0.0.1536.864" timestamp="1581898933656" />
+    <state x="549" y="188" key="FileChooserDialogImpl/0.0.1536.864@0.0.1536.864" timestamp="1581900270591" />
+    <state x="277" y="16" key="SettingsEditor" timestamp="1581900075294">
+      <screen x="0" y="0" width="1536" height="864" />
+    </state>
+    <state x="277" y="16" key="SettingsEditor/0.0.1536.864@0.0.1536.864" timestamp="1581900075294" />
+    <state x="578" y="350" key="com.intellij.openapi.vcs.update.UpdateOrStatusOptionsDialogupdate-v2" timestamp="1581900089877">
+      <screen x="0" y="0" width="1536" height="864" />
+    </state>
+    <state x="578" y="350" key="com.intellij.openapi.vcs.update.UpdateOrStatusOptionsDialogupdate-v2/0.0.1536.864@0.0.1536.864" timestamp="1581900089877" />
   </component>
 </project>

@@ -2,8 +2,8 @@ package controller;
 
 import java.util.Scanner;
 
-import model.Comparendo;
-import model.logic.Cola;
+import model.logic.Comparendo;
+import model.data_structures.Cola;
 import model.logic.Modelo;
 
 import view.View;
@@ -16,7 +16,6 @@ public class Controller {
 	
 	/**
 	 * Crear la vista y el modelo del proyecto
-	 * @param capacidad tamaNo inicial del arreglo
 	 */
 	public Controller ()
 	{

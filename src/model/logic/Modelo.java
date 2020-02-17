@@ -4,16 +4,14 @@ import java.io.FileNotFoundException;
 import java.io.FileReader;
 import java.text.ParseException;
 import java.text.SimpleDateFormat;
-import java.util.ArrayList;
 import java.util.Date;
-import java.util.List;
 
 import com.google.gson.JsonArray;
 import com.google.gson.JsonElement;
 import com.google.gson.JsonParser;
 import com.google.gson.stream.JsonReader;
 
-import model.Comparendo;
+import model.data_structures.Cola;
 
 /**
  * Definicion del modelo del mundo
@@ -23,9 +21,7 @@ public class Modelo {
 
 	private Cola<Comparendo> datosC;
 
-	public static String PATH = "./data/comparendos_dei_2018_small.geojson";
-	//TODO: implementar los datos grandes
-	//	public static String PATH = "../../../../Datos-Material/2020-10/Proyecto1/comparendos_dei_2018.geojson";
+	public static String PATH = "./data/comparendos_dei_2018.geojson";
 
 
 	public void cargarDatos() {
@@ -73,7 +69,7 @@ public class Modelo {
 	}
 	
 	
-	public Cola<Comparendo> darDatosC()
+	public Cola darDatosC()
 	{
 		return datosC;
 	}
