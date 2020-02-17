@@ -1,18 +1,17 @@
 package controller;
 
-import java.util.List;
 import java.util.Scanner;
 
 import model.Comparendo;
+import model.logic.Cola;
 import model.logic.Modelo;
+
 import view.View;
 
 public class Controller {
 
-	/* Instancia del Modelo*/
 	private Modelo modelo;
 	
-	/* Instancia de la Vista*/
 	private View view;
 	
 	/**
@@ -25,34 +24,40 @@ public class Controller {
 		modelo = new Modelo();
 	}
 		
+	@SuppressWarnings("resource")
 	public void run() 
 	{
 		Scanner lector = new Scanner(System.in);
 		boolean fin = false;
-		String dato = "";
-		String respuesta = "";
 
 		while( !fin ){
 			view.printMenu();
 
 			int option = lector.nextInt();
+			
 			switch(option){
 				case 1:
 				    modelo = new Modelo();
+					modelo.cargarDatos();
 					
 				    long start = System.currentTimeMillis();
-				    List<Comparendo> lista = modelo.cargarDatos();
+				    Cola<Comparendo> listaC = modelo.darDatosC();
+				    
 				    long end = System.currentTimeMillis();
 				    
-				    view.printMessage("Tiempo de carga (s): " + (end-start)/1000.0);
-					view.printMessage("Datos cargados: " + lista.size() + "\n");
-					view.printMessage("Primer dato: " + lista.get(0) + "\n");
-					view.printMessage("Ultimo dato: " + lista.get(lista.size() - 1 ) + "\n");
+				    view.printMessage("Tiempo de carga (seg): " + (end-start)/1000.0);
+
+				    view.printMessage("Total datos cargados: " + listaC.size() + "\n");
+
+					view.printMessage("Primer dato: " + listaC.primeroNodo() + "\n");
+				    
+				    
 					break;
-					
 				case 2:
-					fin = true;
+					
 					break;
+				case 3:
+					
 
 				default: 
 					view.printMessage("--------- \n Opcion Invalida !! \n---------");
