@@ -40,15 +40,15 @@ public class Controller {
 					modelo.cargarDatos();
 					
 				    long start = System.currentTimeMillis();
-				    Queue<Comparendo> listaC = modelo.darDatosC();
+				    Queue<Comparendo> cola = modelo.cargarDatos();
 				    
 				    long end = System.currentTimeMillis();
 				    
 				    view.printMessage("Tiempo de carga (seg): " + (end-start)/1000.0);
 
-				    view.printMessage("Total datos cargados: " + listaC.darTamano() + "\n");
+				    view.printMessage("Total datos cargados: " + cola.darTamano() + "\n");
 
-					view.printMessage("Primer dato: " + listaC.peek() + "\n");
+					view.printMessage("Primer dato: " + cola.peek() + "\n");
 				    
 				    
 					break;

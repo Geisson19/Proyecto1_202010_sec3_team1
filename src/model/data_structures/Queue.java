@@ -20,14 +20,16 @@ public class Queue<T> implements IQueue<T> {
      * @param pElemento
      */
     public void enQueue(T pElemento) {
-        Node<T> nuevoUltimo = new Node<T>(pElemento);
-        nuevoUltimo.cambiarSiguiente(null);
+        Node<T> nuevo = new Node<T>(pElemento);
+
         if (estaVacia()) {
-            primero = nuevoUltimo;
-            ultimo = nuevoUltimo;
+            primero = nuevo;
+            ultimo = nuevo;
+
         } else {
-            ultimo.cambiarSiguiente(nuevoUltimo);
-            ultimo = nuevoUltimo;
+            ultimo.cambiarSiguiente(nuevo);
+            ultimo = nuevo;
+
         }
         tamano++;
     }
@@ -38,16 +40,17 @@ public class Queue<T> implements IQueue<T> {
      * @return Primer elemento.
      */
     public T deQueue() {
+
         if (estaVacia()) {
             ultimo = null;
             return null;
         }
 
-        T temp = primero.darElemento();
+        T elemento = primero.darElemento();
         primero = primero.darSiguiente();
         tamano--;
 
-        return temp;
+        return elemento;
     }
 
     /**
