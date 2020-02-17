@@ -11,7 +11,7 @@ import com.google.gson.JsonElement;
 import com.google.gson.JsonParser;
 import com.google.gson.stream.JsonReader;
 
-import model.data_structures.Cola;
+import model.data_structures.Queue;
 
 /**
  * Definicion del modelo del mundo
@@ -19,14 +19,14 @@ import model.data_structures.Cola;
  */
 public class Modelo {
 
-	private Cola<Comparendo> datosC;
+	private Queue<Comparendo> datosC;
 
 	public static String PATH = "./data/comparendos_dei_2018.geojson";
 
 
 	public void cargarDatos() {
 
-		datosC = new Cola<Comparendo>();
+		datosC = new Queue<Comparendo>();
 
 		JsonReader reader;
 		try {
@@ -57,7 +57,7 @@ public class Modelo {
 						.get(1).getAsDouble();
 
 				Comparendo c = new Comparendo(OBJECTID, FECHA_HORA, DES_INFRAC, MEDIO_DETE, CLASE_VEHI, TIPO_SERVI, INFRACCION, LOCALIDAD, longitud, latitud);
-				datosC.enqueue(c);
+				datosC.enQueue(c);
 			}
 
 		}
@@ -69,7 +69,7 @@ public class Modelo {
 	}
 	
 	
-	public Cola darDatosC()
+	public Queue darDatosC()
 	{
 		return datosC;
 	}

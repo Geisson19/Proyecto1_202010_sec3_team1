@@ -3,7 +3,7 @@ package controller;
 import java.util.Scanner;
 
 import model.logic.Comparendo;
-import model.data_structures.Cola;
+import model.data_structures.Queue;
 import model.logic.Modelo;
 
 import view.View;
@@ -40,15 +40,15 @@ public class Controller {
 					modelo.cargarDatos();
 					
 				    long start = System.currentTimeMillis();
-				    Cola<Comparendo> listaC = modelo.darDatosC();
+				    Queue<Comparendo> listaC = modelo.darDatosC();
 				    
 				    long end = System.currentTimeMillis();
 				    
 				    view.printMessage("Tiempo de carga (seg): " + (end-start)/1000.0);
 
-				    view.printMessage("Total datos cargados: " + listaC.size() + "\n");
+				    view.printMessage("Total datos cargados: " + listaC.darTamano() + "\n");
 
-					view.printMessage("Primer dato: " + listaC.primeroNodo() + "\n");
+					view.printMessage("Primer dato: " + listaC.peek() + "\n");
 				    
 				    
 					break;
