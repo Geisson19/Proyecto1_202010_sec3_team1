@@ -79,11 +79,7 @@ public class Modelo {
             return null;
 
         } else {
-
-            while(i<datos.darTamano())
-			{
-				datos.
-			}
+    	    return null;
 
         }
     }
