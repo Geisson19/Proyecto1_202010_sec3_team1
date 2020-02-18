@@ -75,6 +75,11 @@ public class Queue<T> implements IQueue<T> {
         }
     }
 
+    public Node darPrimero()
+    {
+        return primero;
+    }
+
     /**
      * Se da el tamaño de la cola.
      *

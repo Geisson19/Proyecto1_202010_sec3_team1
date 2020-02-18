@@ -6,16 +6,16 @@ import org.junit.*;
 
 import model.data_structures.*;
 
-public class TestListaEncadenadaPila 
+public class TestListaEncadenadaCola 
 {
 
-	private ListaEncadenadaPila<String> pila;
+	private Queue<String> cola;
 	private static int TAMANO= 100;
 	
 	@Before
 	public void setUp1()
 	{
-		pila= new ListaEncadenadaPila<String>();
+		cola= new Queue<>();
 	}
 	
 	public void setUp2()
@@ -23,7 +23,7 @@ public class TestListaEncadenadaPila
 		int cont=0;
 		while(cont<TAMANO)
 		{
-			pila.insertarComienzo(" "+cont);
+			cola.enQueue(" "+cont);
 			cont++;
 		}
 	}
@@ -33,15 +33,15 @@ public class TestListaEncadenadaPila
 	public void testListaEncadenada() 
 	{
 		// TODO
-		assertTrue(pila!=null);
-		assertEquals(0,pila.darLongitud());
+		assertTrue(cola!=null);
+		assertEquals(0,cola.darTamano());
 	}
 	
 	@Test
 	public void darLongitud() {
 		setUp2();
 		// TODO
-		assertEquals(100,pila.darLongitud());
+		assertEquals(100,cola.darTamano());
 		
 	}
 	
@@ -49,28 +49,26 @@ public class TestListaEncadenadaPila
 	public void darCabeza() {
 		setUp2();
 		// TODO
-		assertEquals(" "+99,pila.darCabeza());
+		assertEquals(" "+0,cola.darPrimero());
 		
 	}
 	
 	@Test
 	public void esListaVacia() {
 		
-		assertTrue(pila.esListaVacia());
+		assertTrue(cola.estaVacia());
 		setUp2();
-		assertFalse(pila.esListaVacia());
+		assertFalse(cola.estaVacia());
 		
 	}
 	
 
-	
 	@Test
-	public void testInsertarComienzo() {
+	public void testInsertarFinal() {
 		setUp2();
 		// TODO
-		pila.insertarComienzo(" "+ 200);
-		assertEquals(" "+200,pila.darCabeza());
-		
+		assertEquals(100,cola.darTamano());
+		assertEquals(" "+99,cola.peek());
 	}
 	
 	
@@ -78,11 +76,13 @@ public class TestListaEncadenadaPila
 	public void testEliminarComienzo() {
 		setUp2();
 		// TODO
-		pila.eliminarComienzo();
-		assertEquals(99,pila.darLongitud());
-		assertEquals(" "+98,pila.darCabeza());
+		cola.deQueue();
+		assertEquals(99,cola.darTamano());
+		assertEquals(" "+1,cola.darPrimero());
 		
 	}
+
+	
 	
 	
 	
