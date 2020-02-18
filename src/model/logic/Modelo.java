@@ -4,9 +4,7 @@ import java.io.FileNotFoundException;
 import java.io.FileReader;
 import java.text.ParseException;
 import java.text.SimpleDateFormat;
-import java.util.ArrayList;
 import java.util.Date;
-import java.util.List;
 
 import com.google.gson.JsonArray;
 import com.google.gson.JsonElement;
@@ -76,6 +74,155 @@ public class Modelo {
 	public Cola<Comparendo> darDatosC()
 	{
 		return datosC;
+	}
+	
+	public Comparendo buscarMayorComparendPorOBID()
+	{
+		Cola<Comparendo> persistencia = datosC;
+
+		Comparendo comparendoActual = null;
+
+		int mayor = 0;
+		
+		int actual = 0;
+		
+		Comparendo mayorComp = null;
+		
+		while(!persistencia.estaVacia())
+		{
+			
+			comparendoActual = persistencia.dequeue();
+			
+			actual = comparendoActual.getObjectId();
+			
+			if(actual > mayor)
+			{
+				
+				mayor = actual;
+				mayorComp = comparendoActual;
+				
+			}
+		
+		}
+		
+		return mayorComp;
+		
+	}
+	
+	public double mayorLatitud()
+	{
+		Cola<Comparendo> persistencia = datosC;
+
+		Comparendo comparendoActual = null;
+
+		double mayor = 0;
+		
+		double actual = 0;
+		
+		while(!persistencia.estaVacia())
+		{
+			
+			comparendoActual = persistencia.dequeue();
+			
+			actual = comparendoActual.getLatitud();
+			
+			if(actual > mayor)
+			{
+				
+				mayor = actual;
+				
+			}
+		
+		}
+		return mayor;
+		
+	}
+	
+	public double menorLatitud()
+	{
+		Cola<Comparendo> persistencia = datosC;
+
+		Comparendo comparendoActual = null;
+
+		double menor = 0;
+		
+		double actual = 0;
+		
+		while(!persistencia.estaVacia())
+		{
+			
+			comparendoActual = persistencia.dequeue();
+			
+			actual = comparendoActual.getLatitud();
+			
+			if(actual < menor)
+			{
+				
+				menor = actual;
+				
+			}
+		
+		}
+		return menor;
+		
+	}
+	
+	public double mayorLongitud()
+	{
+		Cola<Comparendo> persistencia = datosC;
+
+		Comparendo comparendoActual = null;
+
+		double mayor = 0;
+		
+		double actual = 0;
+		
+		while(!persistencia.estaVacia())
+		{
+			
+			comparendoActual = persistencia.dequeue();
+			
+			actual = comparendoActual.getLongitud();
+			
+			if(actual > mayor)
+			{
+				
+				mayor = actual;
+				
+			}
+		
+		}
+		return mayor;
+		
+	}
+	
+	public double menorLongitud()
+	{
+		Cola<Comparendo> persistencia = datosC;
+
+		Comparendo comparendoActual = null;
+
+		double menor = 0;
+		
+		double actual = 0;
+		
+		while(!persistencia.estaVacia())
+		{
+			
+			comparendoActual = persistencia.dequeue();
+			
+			actual = comparendoActual.getLongitud();
+			
+			if(actual < menor)
+			{
+				
+				menor = actual;
+				
+			}
+		
+		}
+		return menor;
+		
 	}
 	
 }
