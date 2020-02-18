@@ -224,6 +224,57 @@ public class Modelo {
 		return menor;
 		
 	}
+
+	public Comparendo primerComparendoPorLocalidadDada(String pLocalidad)
+	{
+		return null;
+	}
 	
+	public Cola<Comparendo> consultarComparendosPorFecha(String pFechaHora)
+	{
+		return null;
+	}
+
+	public Cola<Comparendo> compararComparendoPorIngraccion()
+	{
+		return null;
+	}
+
+	public Comparendo primerComparendoPorInfraccionDada(String pLocalidad)
+	{
+		return null;
+	}
+	
+	public Cola<Comparendo> consultarComparendosPorInfraccion(String pFechaHora)
+	{
+		return null;
+	}
+
+	public Cola<Comparendo> compararComparendoPorInfraccion()
+	{
+		return null;
+	}
+
+	public Cola<Comparendo> mostrarNumeroDeInfraccionParaUnTiempo(String pFechainicial, String pFechaFinal)
+	{
+		return null;
+	}
+
+	public Cola<Comparendo> informacionDeNComparendosPorInfraccionesEnOrden(String pFechaInicial, String pFechaFinal)
+	{
+		return null;
+	}
+
+	public Cola<Comparendo> ordenarHistograma()
+	{
+		return null;
+	}
+
+
+
+
+
+
+
 }
 
