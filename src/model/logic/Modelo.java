@@ -1,21 +1,16 @@
 package model.logic;
 
-import java.io.FileNotFoundException;
 import java.io.FileReader;
-import java.text.ParseException;
 import java.text.SimpleDateFormat;
 import java.util.ArrayList;
 import java.util.Date;
-import java.util.List;
 
 import com.google.gson.JsonArray;
 import com.google.gson.JsonElement;
 import com.google.gson.JsonParser;
 import com.google.gson.stream.JsonReader;
-import com.sun.org.apache.bcel.internal.generic.ARETURN;
 import model.data_structures.Node;
 import model.data_structures.Queue;
-import sun.awt.windows.WBufferStrategy;
 
 /**
  * Definicion del modelo del mundo
@@ -217,8 +212,7 @@ public class Modelo {
         return cola;
     }
 
-    public Queue ordenarCola3A(Queue cola) {
-
+    public void ordenarAlfabeticamenteCola3A(Queue cola) {
 
         Node actual = cola.darPrimero();
 
@@ -236,7 +230,6 @@ public class Modelo {
             actual = actual.darSiguiente();
         }
 
-        return cola;
     }
 
     public ArrayList metodo3A(Queue colaOrdenada, Date pFecha1, Date pFecha2) {
@@ -272,10 +265,100 @@ public class Modelo {
                 infraccion = A.getInfraccion();
                 numeroFecha1 = 0;
                 numeroFecha2 = 0;
+
+                String[] lista = null;
+
+                if (A.getFecha_hora().equals(pFecha1)) {
+                    numeroFecha1++;
+                }
+                if (A.getFecha_hora().equals(pFecha2)) {
+                    numeroFecha2++;
+                }
+
+                lista[0] = A.getInfraccion();
+                lista[1] = String.valueOf(numeroFecha1);
+                lista[2] = String.valueOf(numeroFecha2);
+
+                listaFinal.add(lista);
+
             }
 
             actual = actual.darSiguiente();
         }
+        return listaFinal;
+    }
+
+
+    // Requerimientos Parte C
+    // Parte 1C: Mostrar el número de comparendos por cada código INFRACCION en una LOCALIDAD dada, para un periodo de tiempo dado.
+    // Metodo para generar los comparendos que estan entre esas fechas. Ademas la cola es ordenada alfabeticamente segun infracción.
+
+    public Queue darCola(Date pFechaInicial, Date pFechaFinal) {
+
+        Node actual = datos.darPrimero();
+        Queue<Comparendo> cola = new Queue();
+
+        while (actual != null) {
+            Comparendo A = (Comparendo) actual.darElemento();
+
+            if ((pFechaInicial.compareTo(A.getFecha_hora()) <= 0) && A.getFecha_hora().compareTo(pFechaFinal) <= 0) {
+                cola.enQueue(A);
+            }
+
+            actual = actual.darSiguiente();
+        }
+        ordenarAlfabeticamenteCola3A(cola);
+        return cola;
+    }
+
+    public ArrayList darArrayListComparendosPorInfraccion(Queue<Comparendo> cola) {
+
+        Node actual = cola.darPrimero();
+        Comparendo A = (Comparendo) actual.darElemento();
+        String infra = A.getInfraccion();
+
+        ArrayList listaFinal = new ArrayList();
+        Comparendo[] lista = null;
+
+        while (actual != null) {
+
+            int i = 0;
+
+            while (infra.equals(A.getInfraccion())) {
+
+                A = (Comparendo) actual.darElemento();
+                lista[i] = A;
+                i++;
+                actual = actual.darSiguiente();
+            }
+
+            infra = ((Comparendo) actual.darElemento()).getInfraccion();
+            listaFinal.add(lista);
+            lista = null;
+
+        }
+        return listaFinal;
+    }
+
+    public ArrayList metodo1C(Queue<Comparendo> cola) {
+
+        ArrayList lista = darArrayListComparendosPorInfraccion(cola);
+        ArrayList listaFinal = new ArrayList();
+        Comparendo[] comparendos = null;
+        String[] listaC = null;
+
+        for (int i = 0; i < lista.size(); i++) {
+            comparendos = (Comparendo[]) lista.get(i);
+            String codigoInfraccion = comparendos[0].getInfraccion();
+            int cantidad = comparendos.length;
+            listaC[0] = codigoInfraccion;
+            listaC[1] = String.valueOf(cantidad);
+            listaFinal.add(listaC);
+            listaC = null;
+
+
+        }
+
         return listaFinal;
     }
 
