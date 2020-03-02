@@ -217,19 +217,16 @@ public class Modelo {
         return cola;
     }
 
-    public Queue ordenarCola3A(Date pFecha1, Date pFecha2) {
+    public Queue ordenarCola3A(Queue cola) {
 
-        Queue cola = darColaInfraccion(pFecha1, pFecha2);
 
         Node actual = cola.darPrimero();
 
-        while (actual!=null)
-        {
+        while (actual != null) {
             Comparendo A = (Comparendo) actual.darElemento();
             Comparendo ASig = (Comparendo) actual.darSiguiente().darElemento();
 
-            if(A.getInfraccion().compareToIgnoreCase(ASig.getInfraccion())<0)
-            {
+            if (A.getInfraccion().compareToIgnoreCase(ASig.getInfraccion()) < 0) {
                 Comparendo temp = (Comparendo) actual.darElemento();
                 actual.cambiarElemento(ASig);
                 actual.darSiguiente().cambiarElemento(temp);
@@ -240,6 +237,46 @@ public class Modelo {
         }
 
         return cola;
+    }
+
+    public ArrayList metodo3A(Queue colaOrdenada, Date pFecha1, Date pFecha2) {
+
+        Node actual = colaOrdenada.darPrimero();
+        Comparendo infra = (Comparendo) actual.darElemento();
+        String infraccion = infra.getInfraccion();
+        int numeroFecha1 = 0;
+        int numeroFecha2 = 0;
+        ArrayList listaFinal = new ArrayList();
+
+
+        while (actual != null) {
+            Comparendo A = (Comparendo) actual.darElemento();
+            if (infraccion.equals(A.getInfraccion())) {
+
+                String[] lista = null;
+
+                if (A.getFecha_hora().equals(pFecha1)) {
+                    numeroFecha1++;
+                }
+                if (A.getFecha_hora().equals(pFecha2)) {
+                    numeroFecha2++;
+                }
+
+                lista[0] = A.getInfraccion();
+                lista[1] = String.valueOf(numeroFecha1);
+                lista[2] = String.valueOf(numeroFecha2);
+
+                listaFinal.add(lista);
+
+            } else {
+                infraccion = A.getInfraccion();
+                numeroFecha1 = 0;
+                numeroFecha2 = 0;
+            }
+
+            actual = actual.darSiguiente();
+        }
+        return listaFinal;
     }
 
 
