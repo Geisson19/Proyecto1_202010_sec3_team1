@@ -163,16 +163,12 @@ public class Modelo {
         if (buscado == null) {
             throw new Exception("No se encontro ningun comparendo con la localidad dada.");
         } else {
-<<<<<<< HEAD
-    	    return null;
-=======
             return buscado;
         }
 
     }
 
     //Parte 2A: Consultar los comparendos registrados en el archivo dada una FECHA_HORA.
->>>>>>> alejandro
 
     public Queue consultarPorFecha(Date pFecha) {
         Node actual = datos.darPrimero();

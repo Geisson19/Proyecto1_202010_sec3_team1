@@ -21,6 +21,9 @@ public class Queue<T> implements IQueue<T> {
         return tamano == 0;
     }
 
+    public int darTamano() {
+        return tamano;
+    }
 
     public void enQueue(T pElemento) {
         Node<T> nuevo = new Node(pElemento);
@@ -62,15 +65,6 @@ public class Queue<T> implements IQueue<T> {
         }
     }
 
-
-    /**
-     * Se da el tamaño de la cola.
-     *
-     * @return tamano
-     */
-    public int darTamano() {
-        return tamano;
-    }
     // Metodos auxiliares
 
     public Node darPrimero() {
