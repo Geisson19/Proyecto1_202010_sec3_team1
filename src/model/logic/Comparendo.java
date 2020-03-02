@@ -30,6 +30,8 @@ public class Comparendo implements Comparable<Comparendo> {
 		latitud = latP;
 	}
 
+
+
 	public String toString() {
 		return "Comparendo [OBJECTID=" + objectId + ", FECHA_HORA=" + fecha_hora + ", DES_INFRAC=" + des_infrac
 				+ ", MEDIO_DETE=" + medio_dete + ", CLASE_VEHI=" + clase_vehi + ", TIPO_SERVI=" + tipo_servi
@@ -37,6 +39,47 @@ public class Comparendo implements Comparable<Comparendo> {
 				+ longitud + "]";
 	}
 
+
+
+	public int getObjectId() {
+		return objectId;
+	}
+
+	public Date getFecha_hora() {
+		return fecha_hora;
+	}
+
+	public String getDes_infrac() {
+		return des_infrac;
+	}
+
+	public String getMedio_dete() {
+		return medio_dete;
+	}
+
+	public String getClase_vehi() {
+		return clase_vehi;
+	}
+
+	public String getTipo_servi() {
+		return tipo_servi;
+	}
+
+	public String getInfraccion() {
+		return infraccion;
+	}
+
+	public String getLocalidad() {
+		return localidad;
+	}
+
+	public double getLatitud() {
+		return latitud;
+	}
+
+	public double getLongitud() {
+		return longitud;
+	}
 
 	@Override
 	public int compareTo(Comparendo comparendo) {

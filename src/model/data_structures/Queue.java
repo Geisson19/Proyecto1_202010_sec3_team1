@@ -1,5 +1,7 @@
 package model.data_structures;
 
+import model.logic.Comparendo;
+
 public class Queue<T> implements IQueue<T> {
 
     //Atributo
@@ -14,13 +16,17 @@ public class Queue<T> implements IQueue<T> {
         ultimo = null;
     }
 
-    /**
-     * Se agrega un elemento al final de la cola.
-     *
-     * @param pElemento
-     */
+
+    public boolean estaVacia() {
+        return tamano == 0;
+    }
+
+    public int darTamano() {
+        return tamano;
+    }
+
     public void enQueue(T pElemento) {
-        Node<T> nuevo = new Node<T>(pElemento);
+        Node<T> nuevo = new Node(pElemento);
 
         if (estaVacia()) {
             primero = nuevo;
@@ -32,55 +38,39 @@ public class Queue<T> implements IQueue<T> {
 
         }
         tamano++;
+
     }
 
-    /**
-     * Se regresa el primer elemento y se elimina de la cola.
-     *
-     * @return Primer elemento.
-     */
     public T deQueue() {
-
         if (estaVacia()) {
-            ultimo = null;
+
             return null;
+        } else {
+            T elemento = primero.darElemento();
+            primero = primero.darSiguiente();
+            tamano--;
+            return elemento;
         }
 
-        T elemento = primero.darElemento();
-        primero = primero.darSiguiente();
-        tamano--;
 
-        return elemento;
     }
 
-    /**
-     * Se comprueba que exista al menos un elemento en la cola.
-     *
-     * @return True si está vacia, false si hay al menos un elemento.
-     */
-    public boolean estaVacia() {
-        return tamano == 0;
-    }
-
-    /**
-     * Se da el primer elemento y no es eliminado.
-     *
-     * @return Primer elemento
-     */
     public T peek() {
+
         if (estaVacia()) {
             return null;
+
         } else {
             return primero.darElemento();
         }
     }
 
-    /**
-     * Se da el tamaño de la cola.
-     *
-     * @return tamano
-     */
-    public int darTamano() {
-        return tamano;
+    // Metodos auxiliares
+
+    public Node darPrimero() {
+        return primero;
     }
+
+
+
 }

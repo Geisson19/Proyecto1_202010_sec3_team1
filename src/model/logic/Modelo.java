@@ -12,7 +12,10 @@ import com.google.gson.JsonArray;
 import com.google.gson.JsonElement;
 import com.google.gson.JsonParser;
 import com.google.gson.stream.JsonReader;
+import com.sun.org.apache.bcel.internal.generic.ARETURN;
+import model.data_structures.Node;
 import model.data_structures.Queue;
+import sun.awt.windows.WBufferStrategy;
 
 /**
  * Definicion del modelo del mundo
@@ -23,9 +26,9 @@ public class Modelo {
 
     private Queue<Comparendo> datos;
 
+    // Solución de carga de Datos implementada en la clase.
 
-    public Queue cargarDatos() {
-
+    public Queue<Comparendo> cargarDatosPila() {
         datos = new Queue<>();
 
         JsonReader reader;
@@ -56,11 +59,11 @@ public class Modelo {
                 double latitud = e.getAsJsonObject().get("geometry").getAsJsonObject().get("coordinates").getAsJsonArray()
                         .get(1).getAsDouble();
 
-                Comparendo c = new Comparendo(OBJECTID, FECHA_HORA, DES_INFRAC, MEDIO_DETE, CLASE_VEHI, TIPO_SERVI, INFRACCION, LOCALIDAD, longitud, latitud);
+                Comparendo c = new Comparendo(OBJECTID, FECHA_HORA, MEDIO_DETE, CLASE_VEHI, TIPO_SERVI, INFRACCION, DES_INFRAC, LOCALIDAD, longitud, latitud);
                 datos.enQueue(c);
             }
 
-        } catch (FileNotFoundException | ParseException e) {
+        } catch (Exception e) {
             System.out.println(e.getMessage());
             e.printStackTrace();
         }
@@ -68,25 +71,23 @@ public class Modelo {
 
     }
 
-    public int darDatosCargadosCola() {
-        return datos.darTamano();
-    }
+    // Metodos al cargar datos
+    public Comparendo mayorObjectID() {
 
-    public Comparendo buscarLocalidad(String pLocalidad) {
+        Node actual = datos.darPrimero();
+        Comparendo mayor = (Comparendo) actual.darElemento();
 
-    	int i = 0;
-    	if (datos.estaVacia()) {
-            return null;
+        while (actual.darSiguiente() != null) {
+            Comparendo A = (Comparendo) actual.darElemento();
 
-        } else {
+            if (mayor.getObjectId() < A.getObjectId()) {
+                mayor = A;
+            }
 
-            while(i<datos.darTamano())
-			{
-				datos.
-			}
-
+            actual = actual.darSiguiente();
         }
+        return mayor;
     }
 
-
+    
 }
