@@ -58,6 +58,13 @@ public class Controller {
 
                     break;
                 case 2:
+                    view.printMessage(" Ingrese la localidad en la que desea buscar.");
+                    String loc = lector.next();
+                    try {
+                        view.printMessage("x "+modelo.buscarPorLocalidad(loc));
+                    } catch (Exception e) {
+                        e.getMessage();
+                    }
 
                     break;
                 case 3:

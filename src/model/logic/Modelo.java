@@ -77,7 +77,7 @@ public class Modelo {
         Node actual = datos.darPrimero();
         Comparendo mayor = (Comparendo) actual.darElemento();
 
-        while (actual!= null) {
+        while (actual != null) {
             Comparendo A = (Comparendo) actual.darElemento();
 
             if (mayor.getObjectId() < A.getObjectId()) {
@@ -89,15 +89,12 @@ public class Modelo {
         return mayor;
     }
 
-    public double mayorLatitud()
-    {
+    public double mayorLatitud() {
         Node actual = datos.darPrimero();
         Comparendo mayor = (Comparendo) actual.darElemento();
 
-        while( actual!=null)
-        {
-            if(mayor.getLatitud()<((Comparendo) actual.darElemento()).getLatitud())
-            {
+        while (actual != null) {
+            if (mayor.getLatitud() < ((Comparendo) actual.darElemento()).getLatitud()) {
                 mayor = (Comparendo) actual.darElemento();
             }
 
@@ -105,15 +102,13 @@ public class Modelo {
         }
         return mayor.getLatitud();
     }
-    public double menorLatitud()
-    {
+
+    public double menorLatitud() {
         Node actual = datos.darPrimero();
         Comparendo mayor = (Comparendo) actual.darElemento();
 
-        while( actual!=null)
-        {
-            if(mayor.getLatitud()>((Comparendo) actual.darElemento()).getLatitud())
-            {
+        while (actual != null) {
+            if (mayor.getLatitud() > ((Comparendo) actual.darElemento()).getLatitud()) {
                 mayor = (Comparendo) actual.darElemento();
             }
 
@@ -121,15 +116,13 @@ public class Modelo {
         }
         return mayor.getLatitud();
     }
-    public double mayorLongitud()
-    {
+
+    public double mayorLongitud() {
         Node actual = datos.darPrimero();
         Comparendo mayor = (Comparendo) actual.darElemento();
 
-        while( actual!=null)
-        {
-            if(mayor.getLongitud()<((Comparendo) actual.darElemento()).getLongitud())
-            {
+        while (actual != null) {
+            if (mayor.getLongitud() < ((Comparendo) actual.darElemento()).getLongitud()) {
                 mayor = (Comparendo) actual.darElemento();
             }
 
@@ -137,15 +130,13 @@ public class Modelo {
         }
         return mayor.getLongitud();
     }
-    public double menorLongitud()
-    {
+
+    public double menorLongitud() {
         Node actual = datos.darPrimero();
         Comparendo mayor = (Comparendo) actual.darElemento();
 
-        while( actual!=null)
-        {
-            if(mayor.getLongitud()>((Comparendo) actual.darElemento()).getLongitud())
-            {
+        while (actual != null) {
+            if (mayor.getLongitud() > ((Comparendo) actual.darElemento()).getLongitud()) {
                 mayor = (Comparendo) actual.darElemento();
             }
 
@@ -153,5 +144,59 @@ public class Modelo {
         }
         return mayor.getLongitud();
     }
+
+    // Requerimientos Parte A
+
+    // Parte 1A: Consultar el primer comparendo que aparezca en el archivo que tiene una LOCALIDAD dada.
+
+    public Comparendo buscarPorLocalidad(String pLocalidad) throws Exception {
+        Node actual = datos.darPrimero();
+        Comparendo buscado = null;
+
+        while (actual != null) {
+            Comparendo A = (Comparendo) actual.darElemento();
+            if (A.getLocalidad().equals(pLocalidad)) {
+                buscado = A;
+            }
+            actual = actual.darSiguiente();
+        }
+        if (buscado == null) {
+            throw new Exception("No se encontro ningun comparendo con la localidad dada.");
+        } else {
+            return buscado;
+        }
+
+    }
+
+    //Parte 2A: Consultar los comparendos registrados en el archivo dada una FECHA_HORA.
+
+    public Queue consultarPorFecha(Date pFecha) {
+        Node actual = datos.darPrimero();
+        Queue<Comparendo> cola = new Queue<>();
+
+        while (actual != null) {
+            Comparendo A = (Comparendo) actual.darElemento();
+            if (A.getFecha_hora().compareTo(pFecha) == 0) {
+                cola.enQueue(A);
+            }
+            actual = actual.darSiguiente();
+        }
+        Node ac = cola.darPrimero();
+        while (ac != null) {
+            Comparendo A = (Comparendo) ac.darElemento();
+            Comparendo ASig = (Comparendo) ac.darSiguiente().darElemento();
+
+            if (A.getInfraccion().compareTo(ASig.getInfraccion()) < 0) {
+                Comparendo temp = (Comparendo) ac.darElemento();
+                ac.cambiarElemento(ASig);
+                ac.darSiguiente().cambiarElemento(temp);
+            }
+            ac = ac.darSiguiente();
+        }
+        return cola;
+    }
+
+    //Parte 3A: Comparar los comparendos, por cada código INFRACCION, en dos FECHA_HORA dadas.
+
 
 }
