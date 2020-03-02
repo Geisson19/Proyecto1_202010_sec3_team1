@@ -290,6 +290,7 @@ public class Modelo {
 
 
     // Requerimientos Parte C
+
     // Parte 1C: Mostrar el número de comparendos por cada código INFRACCION en una LOCALIDAD dada, para un periodo de tiempo dado.
     // Metodo para generar los comparendos que estan entre esas fechas. Ademas la cola es ordenada alfabeticamente segun infracción.
 
@@ -355,7 +356,6 @@ public class Modelo {
             listaC[1] = String.valueOf(cantidad);
             listaFinal.add(listaC);
             listaC = null;
-
 
         }
 
