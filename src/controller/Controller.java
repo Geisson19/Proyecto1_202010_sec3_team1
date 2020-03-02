@@ -35,24 +35,26 @@ public class Controller {
             switch (option) {
                 case 1:
 
-				try {
+                    try {
 
-					long start = System.currentTimeMillis();
-					Queue<Comparendo> cola = modelo.cargarDatosPila();
+                        long start = System.currentTimeMillis();
+                        Queue<Comparendo> cola = modelo.cargarDatosPila();
 
-					long end = System.currentTimeMillis();
+                        long end = System.currentTimeMillis();
 
-					view.printMessage("Tiempo de carga (seg): " + (end - start) / 1000.0);
+                        // Tiempo de carga
+                        view.printMessage("Tiempo de carga (seg): " + (end - start) / 1000.0);
+                        // Total datos cargados
+                        view.printMessage("Total datos cargados: " + cola.darTamano());
+                        // Mayor objectID
+                        view.printMessage("Comparendo con el mayor Object Id: " + modelo.mayorObjectID());
+                        // Zona Minimax
+                        view.printMessage("Zona Minimax: " + " Menor Latitud= " + modelo.menorLatitud() +
+                                " Menor Longitud= " + modelo.menorLongitud() + " Mayor Latitud= " + modelo.mayorLatitud() + " Mayor Longitud= " + modelo.mayorLongitud() + "\n");
 
-					view.printMessage("Total datos cargados: " + cola.darTamano() );
-
-					//Mayor objectID
-                    view.printMessage("Comparendo con el mayor Object Id: "+modelo.mayorObjectID()+ "\n");
-
-				} catch (Exception e)
-				{
-					e.printStackTrace();
-				}
+                    } catch (Exception e) {
+                        e.printStackTrace();
+                    }
 
                     break;
                 case 2:

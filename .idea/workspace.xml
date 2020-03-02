@@ -2,19 +2,10 @@
 <project version="4">
   <component name="ChangeListManager">
     <list default="true" id="1496e611-ea54-428b-959d-bac3e63a5bfd" name="Default Changelist" comment="">
-      <change beforePath="$PROJECT_DIR$/.idea/encodings.xml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/encodings.xml" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/.idea/uiDesigner.xml" beforeDir="false" />
       <change beforePath="$PROJECT_DIR$/.idea/workspace.xml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/workspace.xml" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/data/.gitignore" beforeDir="false" />
       <change beforePath="$PROJECT_DIR$/out/production/Proyecto1_202010_sec3_team4/controller/Controller.class" beforeDir="false" afterPath="$PROJECT_DIR$/out/production/Proyecto1_202010_sec3_team4/controller/Controller.class" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/out/production/Proyecto1_202010_sec3_team4/model/data_structures/Cola.class" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/out/production/Proyecto1_202010_sec3_team4/model/data_structures/ICola.class" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/out/production/Proyecto1_202010_sec3_team4/model/data_structures/Node.class" beforeDir="false" afterPath="$PROJECT_DIR$/out/production/Proyecto1_202010_sec3_team4/model/data_structures/Node.class" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/out/production/Proyecto1_202010_sec3_team4/model/logic/Modelo.class" beforeDir="false" afterPath="$PROJECT_DIR$/out/production/Proyecto1_202010_sec3_team4/model/logic/Modelo.class" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/src/controller/Controller.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/controller/Controller.java" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/model/data_structures/IQueue.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/model/data_structures/IQueue.java" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/model/data_structures/Queue.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/model/data_structures/Queue.java" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/model/logic/Comparendo.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/model/logic/Comparendo.java" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/src/model/logic/Modelo.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/model/logic/Modelo.java" afterDir="false" />
     </list>
     <option name="SHOW_DIALOG" value="false" />
@@ -78,22 +69,22 @@
       <screen x="0" y="0" width="1536" height="864" />
     </state>
     <state x="549" y="187" key="FileChooserDialogImpl/0.0.1536.864@0.0.1536.864" timestamp="1582922911977" />
-    <state width="1493" height="223" key="GridCell.Tab.0.bottom" timestamp="1583160850700">
+    <state width="1493" height="223" key="GridCell.Tab.0.bottom" timestamp="1583162688949">
       <screen x="0" y="0" width="1536" height="864" />
     </state>
-    <state width="1493" height="223" key="GridCell.Tab.0.bottom/0.0.1536.864@0.0.1536.864" timestamp="1583160850700" />
-    <state width="1493" height="223" key="GridCell.Tab.0.center" timestamp="1583160850700">
+    <state width="1493" height="223" key="GridCell.Tab.0.bottom/0.0.1536.864@0.0.1536.864" timestamp="1583162688949" />
+    <state width="1493" height="223" key="GridCell.Tab.0.center" timestamp="1583162688949">
       <screen x="0" y="0" width="1536" height="864" />
     </state>
-    <state width="1493" height="223" key="GridCell.Tab.0.center/0.0.1536.864@0.0.1536.864" timestamp="1583160850700" />
-    <state width="1493" height="223" key="GridCell.Tab.0.left" timestamp="1583160850700">
+    <state width="1493" height="223" key="GridCell.Tab.0.center/0.0.1536.864@0.0.1536.864" timestamp="1583162688949" />
+    <state width="1493" height="223" key="GridCell.Tab.0.left" timestamp="1583162688949">
       <screen x="0" y="0" width="1536" height="864" />
     </state>
-    <state width="1493" height="223" key="GridCell.Tab.0.left/0.0.1536.864@0.0.1536.864" timestamp="1583160850700" />
-    <state width="1493" height="223" key="GridCell.Tab.0.right" timestamp="1583160850700">
+    <state width="1493" height="223" key="GridCell.Tab.0.left/0.0.1536.864@0.0.1536.864" timestamp="1583162688949" />
+    <state width="1493" height="223" key="GridCell.Tab.0.right" timestamp="1583162688949">
       <screen x="0" y="0" width="1536" height="864" />
     </state>
-    <state width="1493" height="223" key="GridCell.Tab.0.right/0.0.1536.864@0.0.1536.864" timestamp="1583160850700" />
+    <state width="1493" height="223" key="GridCell.Tab.0.right/0.0.1536.864@0.0.1536.864" timestamp="1583162688949" />
     <state x="249" y="7" key="SettingsEditor" timestamp="1582922913206">
       <screen x="0" y="0" width="1536" height="864" />
     </state>
@@ -106,5 +97,9 @@
       <screen x="0" y="0" width="1536" height="864" />
     </state>
     <state x="465" y="256" key="com.intellij.ide.util.TipDialog/0.0.1536.864@0.0.1536.864" timestamp="1583155979585" />
+    <state x="431" y="181" width="672" height="678" key="search.everywhere.popup" timestamp="1583162436783">
+      <screen x="0" y="0" width="1536" height="864" />
+    </state>
+    <state x="431" y="181" width="672" height="678" key="search.everywhere.popup/0.0.1536.864@0.0.1536.864" timestamp="1583162436783" />
   </component>
 </project>

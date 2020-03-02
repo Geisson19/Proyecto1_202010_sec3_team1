@@ -77,7 +77,7 @@ public class Modelo {
         Node actual = datos.darPrimero();
         Comparendo mayor = (Comparendo) actual.darElemento();
 
-        while (actual.darSiguiente() != null) {
+        while (actual!= null) {
             Comparendo A = (Comparendo) actual.darElemento();
 
             if (mayor.getObjectId() < A.getObjectId()) {
@@ -89,5 +89,69 @@ public class Modelo {
         return mayor;
     }
 
-    
+    public double mayorLatitud()
+    {
+        Node actual = datos.darPrimero();
+        Comparendo mayor = (Comparendo) actual.darElemento();
+
+        while( actual!=null)
+        {
+            if(mayor.getLatitud()<((Comparendo) actual.darElemento()).getLatitud())
+            {
+                mayor = (Comparendo) actual.darElemento();
+            }
+
+            actual = actual.darSiguiente();
+        }
+        return mayor.getLatitud();
+    }
+    public double menorLatitud()
+    {
+        Node actual = datos.darPrimero();
+        Comparendo mayor = (Comparendo) actual.darElemento();
+
+        while( actual!=null)
+        {
+            if(mayor.getLatitud()>((Comparendo) actual.darElemento()).getLatitud())
+            {
+                mayor = (Comparendo) actual.darElemento();
+            }
+
+            actual = actual.darSiguiente();
+        }
+        return mayor.getLatitud();
+    }
+    public double mayorLongitud()
+    {
+        Node actual = datos.darPrimero();
+        Comparendo mayor = (Comparendo) actual.darElemento();
+
+        while( actual!=null)
+        {
+            if(mayor.getLongitud()<((Comparendo) actual.darElemento()).getLongitud())
+            {
+                mayor = (Comparendo) actual.darElemento();
+            }
+
+            actual = actual.darSiguiente();
+        }
+        return mayor.getLongitud();
+    }
+    public double menorLongitud()
+    {
+        Node actual = datos.darPrimero();
+        Comparendo mayor = (Comparendo) actual.darElemento();
+
+        while( actual!=null)
+        {
+            if(mayor.getLongitud()>((Comparendo) actual.darElemento()).getLongitud())
+            {
+                mayor = (Comparendo) actual.darElemento();
+            }
+
+            actual = actual.darSiguiente();
+        }
+        return mayor.getLongitud();
+    }
+
 }
