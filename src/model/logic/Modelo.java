@@ -22,9 +22,6 @@ public class Modelo {
 	private Cola<Comparendo> datosC;
 
 	public static String PATH = "./data/comparendos_dei_2018.geojson";
-	//TODO: implementar los datos grandes
-	//	public static String PATH = "../../../../Datos-Material/2020-10/Proyecto1/comparendos_dei_2018.geojson";
-
 
 	public void cargarDatos() {
 
@@ -71,6 +68,16 @@ public class Modelo {
 	}
 	
 	
+	public Cola<Comparendo> copiarDatos()
+	{
+		Cola<Comparendo> copia = new Cola<Comparendo>();
+		for(int i = 0; i<datosC.size(); i++)
+		{
+			copia.enqueue(datosC.getIndex(i).darElemento());
+		}
+		return copia;
+	}
+	
 	public Cola<Comparendo> darDatosC()
 	{
 		return datosC;
@@ -78,7 +85,7 @@ public class Modelo {
 	
 	public Comparendo buscarMayorComparendPorOBID()
 	{
-		Cola<Comparendo> persistencia = datosC;
+		Cola<Comparendo> persistencia = copiarDatos();
 
 		Comparendo comparendoActual = null;
 
@@ -111,7 +118,7 @@ public class Modelo {
 	
 	public double mayorLatitud()
 	{
-		Cola<Comparendo> persistencia = datosC;
+		Cola<Comparendo> persistencia = copiarDatos();
 
 		Comparendo comparendoActual = null;
 
@@ -140,7 +147,7 @@ public class Modelo {
 	
 	public double menorLatitud()
 	{
-		Cola<Comparendo> persistencia = datosC;
+		Cola<Comparendo> persistencia = copiarDatos();
 
 		Comparendo comparendoActual = null;
 
@@ -169,7 +176,7 @@ public class Modelo {
 	
 	public double mayorLongitud()
 	{
-		Cola<Comparendo> persistencia = datosC;
+		Cola<Comparendo> persistencia = copiarDatos();
 
 		Comparendo comparendoActual = null;
 
@@ -198,7 +205,7 @@ public class Modelo {
 	
 	public double menorLongitud()
 	{
-		Cola<Comparendo> persistencia = datosC;
+		Cola<Comparendo> persistencia = copiarDatos();
 
 		Comparendo comparendoActual = null;
 
@@ -269,12 +276,6 @@ public class Modelo {
 	{
 		return null;
 	}
-
-
-
-
-
-
 
 }
 

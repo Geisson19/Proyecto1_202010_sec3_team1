@@ -39,20 +39,16 @@ public class Controller {
 				case 1:
 				    modelo = new Modelo();
 				
-
 				    long start = System.currentTimeMillis();
 					modelo.cargarDatos();
 				    long end = System.currentTimeMillis();
 				    
 				    Cola<Comparendo> listaC = modelo.darDatosC();
 
-				    
 				    view.printMessage("Tiempo de carga (seg): " + (end-start)/1000.0 + "\n");
 
 				    view.printMessage("Total datos cargados: " + listaC.size() + "\n");
 				    
-				    
-
 					break;
 				case 2:
 					

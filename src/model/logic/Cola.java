@@ -46,6 +46,25 @@ public class Cola<E> implements ICola{
 			return toReturn;
 		}
 	}
+	
+	public Node<E> getIndex(int index)
+	{
+		Node<E> actual = primero;
+		
+		if(index == 0)
+			return actual;
+		else
+		{
+			int j = 0;
+			while(actual.darSiguiente() != null && j<index)
+			{
+				actual = actual.darSiguiente();
+				j++;
+			}
+		}
+		
+		return actual;
+	}
 
 	public E primeroNodo()
 	{
