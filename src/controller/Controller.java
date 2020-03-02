@@ -38,34 +38,21 @@ public class Controller {
 			switch(option){
 				case 1:
 				    modelo = new Modelo();
-					modelo.cargarDatos();
-					
+				
 
 				    long start = System.currentTimeMillis();
-				    Cola<Comparendo> listaC = modelo.darDatosC();
-				    
+					modelo.cargarDatos();
 				    long end = System.currentTimeMillis();
 				    
-					double minlon, minlat, maxlon, maxlat;
-					
-					minlon = modelo.menorLongitud();
-					
-					minlat = modelo.menorLatitud();
-					
-					maxlon = modelo.mayorLongitud();
-					
-					maxlat = modelo.mayorLatitud();
+				    Cola<Comparendo> listaC = modelo.darDatosC();
+
 				    
 				    view.printMessage("Tiempo de carga (seg): " + (end-start)/1000.0 + "\n");
 
 				    view.printMessage("Total datos cargados: " + listaC.size() + "\n");
+				    
+				    
 
-					view.printMessage("Comparendo con el OBJECT ID más alto: " + modelo.buscarMayorComparendPorOBID().toString() + "\n");
-
-					view.printMessage("Rectangulo Minimax: " + "(" + minlat + "," + minlon + ")" + "(" + maxlat + "," + maxlon + ")");
-
-					
-					
 					break;
 				case 2:
 					

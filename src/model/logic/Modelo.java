@@ -21,7 +21,7 @@ public class Modelo {
 
 	private Cola<Comparendo> datosC;
 
-	public static String PATH = "./data/comparendos_dei_2018_small.geojson";
+	public static String PATH = "./data/comparendos_dei_2018.geojson";
 	//TODO: implementar los datos grandes
 	//	public static String PATH = "../../../../Datos-Material/2020-10/Proyecto1/comparendos_dei_2018.geojson";
 
