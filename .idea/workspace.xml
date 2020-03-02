@@ -3,14 +3,7 @@
   <component name="ChangeListManager">
     <list default="true" id="1496e611-ea54-428b-959d-bac3e63a5bfd" name="Default Changelist" comment="">
       <change beforePath="$PROJECT_DIR$/.idea/workspace.xml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/workspace.xml" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/out/production/Proyecto1_202010_sec3_team4/controller/Controller.class" beforeDir="false" afterPath="$PROJECT_DIR$/out/production/Proyecto1_202010_sec3_team4/controller/Controller.class" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/out/production/Proyecto1_202010_sec3_team4/model/logic/Modelo.class" beforeDir="false" afterPath="$PROJECT_DIR$/out/production/Proyecto1_202010_sec3_team4/model/logic/Modelo.class" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/out/production/Proyecto1_202010_sec3_team4/view/View.class" beforeDir="false" afterPath="$PROJECT_DIR$/out/production/Proyecto1_202010_sec3_team4/view/View.class" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/controller/Controller.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/controller/Controller.java" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/main/Main.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/Main.java" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/model/data_structures/Queue.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/model/data_structures/Queue.java" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/src/model/logic/Modelo.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/model/logic/Modelo.java" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/view/View.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/view/View.java" afterDir="false" />
     </list>
     <option name="SHOW_DIALOG" value="false" />
     <option name="HIGHLIGHT_CONFLICTS" value="true" />

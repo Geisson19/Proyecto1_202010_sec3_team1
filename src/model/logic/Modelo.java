@@ -196,7 +196,51 @@ public class Modelo {
         return cola;
     }
 
-    //Parte 3A: Comparar los comparendos, por cada código INFRACCION, en dos FECHA_HORA dadas.
+    // Parte 3A: Comparar los comparendos, por cada código INFRACCION, en dos FECHA_HORA dadas.
+    // Generar cola con los comparendos que tienen registros en alguna fecha que entra por parametro.
+
+    public Queue darColaInfraccion(Date pFecha1, Date pFecha2) {
+
+        Node actual = datos.darPrimero();
+        Queue<Comparendo> cola = new Queue();
+
+        while (actual != null) {
+            Comparendo A = (Comparendo) actual.darElemento();
+
+            if (A.getFecha_hora().equals(pFecha1) || A.getFecha_hora().equals(pFecha2)) {
+                cola.enQueue(A);
+            }
+
+            actual = actual.darSiguiente();
+        }
+
+        return cola;
+    }
+
+    public Queue ordenarCola3A(Date pFecha1, Date pFecha2) {
+
+        Queue cola = darColaInfraccion(pFecha1, pFecha2);
+
+        Node actual = cola.darPrimero();
+
+        while (actual!=null)
+        {
+            Comparendo A = (Comparendo) actual.darElemento();
+            Comparendo ASig = (Comparendo) actual.darSiguiente().darElemento();
+
+            if(A.getInfraccion().compareToIgnoreCase(ASig.getInfraccion())<0)
+            {
+                Comparendo temp = (Comparendo) actual.darElemento();
+                actual.cambiarElemento(ASig);
+                actual.darSiguiente().cambiarElemento(temp);
+            }
+
+
+            actual = actual.darSiguiente();
+        }
+
+        return cola;
+    }
 
 
 }
