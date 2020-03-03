@@ -102,10 +102,8 @@ public class Comparendo {
 	
 	@Override
 	public String toString() {
-		return "Comparendo [OBJECTID=" + objectId + ", FECHA_HORA=" + fecha_hora + ", DES_INFRAC=" + des_infrac
-				+ ", MEDIO_DETE=" + medio_dete + ", CLASE_VEHI=" + clase_vehi + ", TIPO_SERVI=" + tipo_servi
-				+ ", INFRACCION=" + infraccion + ", LOCALIDAD=" + localidad + ", latitud=" + latitud + ", longitud="
-				+ longitud + "]";
+		return ("OBJECTID =" + objectId + ", FECHA Y HORA =" + fecha_hora + ", INFRACCION =" + infraccion + 
+				", CLASE VEHICULO=" + clase_vehi + ", TIPO SERVICIO" + tipo_servi + ", LOCALIDAD =" + localidad);
 	}
 	
 }

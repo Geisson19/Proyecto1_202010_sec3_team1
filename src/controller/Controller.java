@@ -43,12 +43,18 @@ public class Controller {
 					modelo.cargarDatos();
 				    long end = System.currentTimeMillis();
 				    
+				    Comparendo mayorOBJID = modelo.buscarMayorComparendPorOBID();
+				    
 				    Cola<Comparendo> listaC = modelo.darDatosC();
 
 				    view.printMessage("Tiempo de carga (seg): " + (end-start)/1000.0 + "\n");
 
 				    view.printMessage("Total datos cargados: " + listaC.size() + "\n");
 				    
+				    view.printMessage("Elemento con el mayor OBJECTID: " + mayorOBJID.toString() + "\n");
+				    
+				    view.printMessage("Zona Minimax: (" + modelo.menorLatitud() + "," + modelo.menorLongitud() + ") y "
+				    		+ ",("+ modelo.mayorLatitud() +","+ modelo.mayorLongitud() +")");
 				    
 					break;
 				case 2:// caso 1B
@@ -61,13 +67,15 @@ public class Controller {
 					if (buscado == null)
 						view.printMessage("No existe una infracción con ese código en nuestros registros");
 					else
-						view.printMessage("OBJECTID =" +buscado.getObjectId() + ", FECHA Y HORA =" + buscado.getFecha_hora() + ", INFRACCION =" +buscado.getInfraccion() + 
-								", CLASE VEHICULO=" +buscado.getClase_vehi() + ", TIPO SERVICIO" +buscado.getTipo_servi() + ", LOCALIDAD =" +buscado.getLocalidad());
+						view.printMessage(buscado.toString());
 
 					break;
-				case 3:
+				case 3:// caso 2B
 					
-
+					break;
+				case 4:// caso 3B
+					
+					break;
 				default: 
 					view.printMessage("--------- \n Opcion Invalida !! \n---------");
 					break;

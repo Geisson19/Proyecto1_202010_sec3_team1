@@ -232,20 +232,6 @@ public class Modelo {
 		
 	}
 
-	public Comparendo primerComparendoPorLocalidadDada(String pLocalidad)
-	{
-		return null;
-	}
-	
-	public Cola<Comparendo> consultarComparendosPorFecha(String pFechaHora)
-	{
-		return null;
-	}
-
-	public Cola<Comparendo> compararComparendoPorIngraccion()
-	{
-		return null;
-	}
 
 	//Requerimientos PARTE B
 	
