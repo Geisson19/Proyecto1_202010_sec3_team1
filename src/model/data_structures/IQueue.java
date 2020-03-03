@@ -1,17 +1,18 @@
 package model.data_structures;
 
+public interface IQueue<E> {
 
-public interface IQueue<T> {
-
-    public boolean estaVacia();
-
-    public int darTamano();
-
-    public void enQueue(T pElemento);
-
-    public T deQueue();
-
-    public T peek();
+	public E dequeue();
 
 
+	public E primeroNodo();
+
+
+	public E ultimoNodo();
+
+
+	public int size();
+
+
+	public boolean estaVacia();
 }
