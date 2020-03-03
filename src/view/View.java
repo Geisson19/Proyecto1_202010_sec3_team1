@@ -1,6 +1,5 @@
 package view;
 
-import model.logic.Modelo;
 
 public class View 
 {
@@ -8,9 +7,9 @@ public class View
 		public void printMenu()
 		{
 			System.out.println("1. Cargar Datos");
-			System.out.println("2. Consultar el grupo de comparendos consecutivos más grande por código de infracción");
-			System.out.println("3. Reporte de los últimos comparendos con una infracción dada");
-			System.out.println("Dar el numero de opcion a resolver, luego oprimir tecla Return: (e.g., 1):");
+			System.out.println("1B. Consultar el primer comparendo que tiene una infracción dada");
+			System.out.println("2B. Consultar los comparendos registrados en el archivo dado el codigo de la infracción");
+			System.out.println("3B– Comparación de comparendos por Infracción en servicio Particular y servicio Público");	
 		}
 
 		public void printMessage(String mensaje) {
