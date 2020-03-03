@@ -54,7 +54,7 @@ public class Controller {
 				    view.printMessage("Elemento con el mayor OBJECTID: " + mayorOBJID.toString() + "\n");
 				    
 				    view.printMessage("Zona Minimax: (" + modelo.menorLatitud() + "," + modelo.menorLongitud() + ") y "
-				    		+ ",("+ modelo.mayorLatitud() +","+ modelo.mayorLongitud() +")");
+				    		+ "("+ modelo.mayorLatitud() +","+ modelo.mayorLongitud() +")");
 				    
 					break;
 				case 2:// caso 1B
@@ -71,7 +71,19 @@ public class Controller {
 
 					break;
 				case 3:// caso 2B
+					Scanner opcion2B = new Scanner(System.in);
+					view.printMessage("Por favor, ingrese la infracción por la que desea buscar");
+					String linea2B = opcion2B.nextLine();
 					
+					Cola<Comparendo> orden = modelo.darComparendosEnOrdenCronologico(linea2B);
+					
+					view.printMessage(""+orden.size());
+					
+					while(!orden.estaVacia())
+					{
+						view.printMessage(orden.dequeue().toString());
+					}
+
 					break;
 				case 4:// caso 3B
 					

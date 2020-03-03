@@ -4,6 +4,7 @@ import java.io.FileNotFoundException;
 import java.io.FileReader;
 import java.text.ParseException;
 import java.text.SimpleDateFormat;
+import java.util.Comparator;
 import java.util.Date;
 
 import com.google.gson.JsonArray;
@@ -256,29 +257,66 @@ public class Modelo {
 		return encontro ? comparendoActual : null;
 	}
 	
-	public Cola<Comparendo> consultarComparendosPorInfraccion(String pFechaHora)
+	
+	//2B
+	public Cola<Comparendo> darComparendosEnOrdenCronologico(String infraccion)
 	{
-		return null;
+		Comparendo actual = null;
+		Cola<Comparendo> copia = copiarDatos();
+		Cola<Comparendo> toReturn = new Cola<Comparendo>();
+		while(!copia.estaVacia())
+		{
+			actual = copia.dequeue();
+			if(actual.getInfraccion().equalsIgnoreCase(infraccion))
+			{
+				toReturn.enqueue(actual);
+			}
+		}
+//		qicksort(toReturn);
+		return toReturn;
 	}
-
-	public Cola<Comparendo> compararComparendoPorInfraccion()
+	
+	
+	public void qicksort(Cola<Comparendo> S)
 	{
-		return null;
-	}
-
-	public Cola<Comparendo> mostrarNumeroDeInfraccionParaUnTiempo(String pFechainicial, String pFechaFinal)
-	{
-		return null;
-	}
-
-	public Cola<Comparendo> informacionDeNComparendosPorInfraccionesEnOrden(String pFechaInicial, String pFechaFinal)
-	{
-		return null;
-	}
-
-	public Cola<Comparendo> ordenarHistograma()
-	{
-		return null;
+		int n = S.size();
+		
+		if(n<2) return;
+		
+		//divide
+		
+		Comparendo pivot = S.primeroNodo();
+		
+		Cola<Comparendo> L = new Cola<Comparendo>();
+		Cola<Comparendo> E = new Cola<Comparendo>();
+		Cola<Comparendo> G = new Cola<Comparendo>();
+	
+	
+		while(!S.estaVacia())
+		{
+			Comparendo elemental = S.dequeue();
+			int c = elemental.getFecha_hora().compareTo(pivot.getFecha_hora());
+			if(c<0)
+				L.enqueue(elemental);
+			else if (c == 0)
+			{
+				E.enqueue(elemental);
+			}
+			else
+			{
+				G.enqueue(elemental);
+			}
+		}
+		
+		qicksort(L);
+		qicksort(G);
+		
+		while(!L.estaVacia())
+			S.enqueue(L.dequeue());
+		while(!E.estaVacia())
+			S.enqueue(E.dequeue());
+		while(!G.estaVacia())
+			S.enqueue(G.dequeue());
 	}
 
 }
