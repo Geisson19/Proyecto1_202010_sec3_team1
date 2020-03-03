@@ -1,10 +1,7 @@
 package model.data_structures;
 
 
-import model.data_structures.ICola;
-import model.data_structures.Node;
-
-public class Cola<E> implements ICola {
+public class Queue<E> implements IQueue {
 
 	private Node<E> primero;
 
@@ -12,7 +9,7 @@ public class Cola<E> implements ICola {
 
 	private int tamano;
 
-	public Cola()
+	public Queue()
 	{
 		ultimo = null;
 		primero = null;

@@ -3,7 +3,7 @@ package controller;
 import java.util.Scanner;
 
 import model.Comparendo;
-import model.data_structures.Cola;
+import model.data_structures.Queue;
 import model.logic.Modelo;
 
 import view.View;
@@ -44,9 +44,9 @@ public class Controller {
 				    
 				    Comparendo mayorOBJID = modelo.buscarMayorComparendPorOBID();
 				    
-				    Cola<Comparendo> listaC = modelo.darDatosC();
+				    Queue<Comparendo> listaC = modelo.darDatosC();
 
-				    view.printMessage("Tiempo de carga (seg): " + (end-start)/1000.0 + "\n");
+				    view.printMessage("Tiempo de carga (seg): " + (end-start)/1000 + "\n");
 
 				    view.printMessage("Total datos cargados: " + listaC.size() + "\n");
 
@@ -74,7 +74,7 @@ public class Controller {
 					view.printMessage("Por favor, ingrese la infracci�n por la que desea buscar");
 					String linea2B = opcion2B.nextLine();
 					
-					Cola<Comparendo> orden = modelo.darComparendosEnOrdenCronologico(linea2B);
+					Queue<Comparendo> orden = modelo.darComparendosEnOrdenCronologico(linea2B);
 					
 					view.printMessage(""+orden.size());
 					

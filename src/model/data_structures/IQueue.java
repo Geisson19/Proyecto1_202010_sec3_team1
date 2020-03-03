@@ -1,6 +1,6 @@
 package model.data_structures;
 
-public interface ICola<E> {
+public interface IQueue<E> {
 
 	public E dequeue();
 

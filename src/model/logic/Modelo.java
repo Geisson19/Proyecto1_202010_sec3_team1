@@ -4,7 +4,6 @@ import java.io.FileNotFoundException;
 import java.io.FileReader;
 import java.text.ParseException;
 import java.text.SimpleDateFormat;
-import java.util.Comparator;
 import java.util.Date;
 
 import com.google.gson.JsonArray;
@@ -13,7 +12,7 @@ import com.google.gson.JsonParser;
 import com.google.gson.stream.JsonReader;
 
 import model.Comparendo;
-import model.data_structures.Cola;
+import model.data_structures.Queue;
 
 /**
  * Definicion del modelo del mundo
@@ -21,13 +20,13 @@ import model.data_structures.Cola;
  */
 public class Modelo {
 
-	private Cola<Comparendo> datosC;
+	private Queue<Comparendo> datosC;
 
-	public static String PATH = "./data/comparendos_dei_2018_small.geojson";
+	public static String PATH = "./data/comparendos_dei_2018.geojson";
 
 	public void cargarDatos() {
 
-		datosC = new Cola<Comparendo>();
+		datosC = new Queue<Comparendo>();
 
 		JsonReader reader;
 		try {
@@ -70,9 +69,9 @@ public class Modelo {
 	}
 
 
-	public Cola<Comparendo> copiarDatos()
+	public Queue<Comparendo> copiarDatos()
 	{
-		Cola<Comparendo> copia = new Cola<Comparendo>();
+		Queue<Comparendo> copia = new Queue<Comparendo>();
 		for(int i = 0; i<datosC.size(); i++)
 		{
 			copia.enqueue(datosC.getIndex(i).darElemento());
@@ -80,14 +79,14 @@ public class Modelo {
 		return copia;
 	}
 
-	public Cola<Comparendo> darDatosC()
+	public Queue<Comparendo> darDatosC()
 	{
 		return datosC;
 	}
 
 	public Comparendo buscarMayorComparendPorOBID()
 	{
-		Cola<Comparendo> persistencia = copiarDatos();
+		Queue<Comparendo> persistencia = copiarDatos();
 
 		Comparendo comparendoActual = null;
 
@@ -120,7 +119,7 @@ public class Modelo {
 
 	public double mayorLatitud()
 	{
-		Cola<Comparendo> persistencia = copiarDatos();
+		Queue<Comparendo> persistencia = copiarDatos();
 
 		Comparendo comparendoActual = null;
 
@@ -149,7 +148,7 @@ public class Modelo {
 
 	public double menorLatitud()
 	{
-		Cola<Comparendo> persistencia = copiarDatos();
+		Queue<Comparendo> persistencia = copiarDatos();
 
 		Comparendo comparendoActual = null;
 
@@ -178,7 +177,7 @@ public class Modelo {
 
 	public double mayorLongitud()
 	{
-		Cola<Comparendo> persistencia = copiarDatos();
+		Queue<Comparendo> persistencia = copiarDatos();
 
 		Comparendo comparendoActual = null;
 
@@ -207,7 +206,7 @@ public class Modelo {
 
 	public double menorLongitud()
 	{
-		Cola<Comparendo> persistencia = copiarDatos();
+		Queue<Comparendo> persistencia = copiarDatos();
 
 		Comparendo comparendoActual = null;
 
@@ -240,7 +239,7 @@ public class Modelo {
 	//1B
 	public Comparendo primerComparendoPorInfraccionDada(String pInfraccion)
 	{
-		Cola<Comparendo> persistencia = copiarDatos();
+		Queue<Comparendo> persistencia = copiarDatos();
 
 		Comparendo comparendoActual = null;
 
@@ -260,11 +259,11 @@ public class Modelo {
 
 
 	//2B
-	public Cola<Comparendo> darComparendosEnOrdenCronologico(String infraccion)
+	public Queue<Comparendo> darComparendosEnOrdenCronologico(String infraccion)
 	{
 		Comparendo actual = null;
-		Cola<Comparendo> copia = copiarDatos();
-		Cola<Comparendo> toReturn = new Cola<Comparendo>();
+		Queue<Comparendo> copia = copiarDatos();
+		Queue<Comparendo> toReturn = new Queue<Comparendo>();
 		while(!copia.estaVacia())
 		{
 			actual = copia.dequeue();
@@ -278,7 +277,7 @@ public class Modelo {
 	}
 
 
-	public void qicksort(Cola<Comparendo> S)
+	public void qicksort(Queue<Comparendo> S)
 	{
 		int n = S.size();
 
@@ -288,9 +287,9 @@ public class Modelo {
 
 		Comparendo pivot = S.primeroNodo();
 
-		Cola<Comparendo> L = new Cola<Comparendo>();
-		Cola<Comparendo> E = new Cola<Comparendo>();
-		Cola<Comparendo> G = new Cola<Comparendo>();
+		Queue<Comparendo> L = new Queue<Comparendo>();
+		Queue<Comparendo> E = new Queue<Comparendo>();
+		Queue<Comparendo> G = new Queue<Comparendo>();
 
 
 		while(!S.estaVacia())
