@@ -2,8 +2,8 @@ package controller;
 
 import java.util.Scanner;
 
-import model.Comparendo;
-import model.logic.Cola;
+import model.logic.Comparendo;
+import model.data_structures.Queue;
 import model.logic.Modelo;
 
 import view.View;
@@ -16,7 +16,6 @@ public class Controller {
 	
 	/**
 	 * Crear la vista y el modelo del proyecto
-	 * @param capacidad tamaNo inicial del arreglo
 	 */
 	public Controller ()
 	{
@@ -40,16 +39,16 @@ public class Controller {
 				    modelo = new Modelo();
 					modelo.cargarDatos();
 					
-				    long start = System.currentTimeMillis();
-				    Cola<Comparendo> listaC = modelo.darDatosC();
+				    Long start = System.currentTimeMillis();
+				    Queue<Comparendo> listaC = modelo.darDatosC();
 				    
-				    long end = System.currentTimeMillis();
+				    Long end = System.currentTimeMillis();
 				    
-				    view.printMessage("Tiempo de carga (seg): " + (end-start)/1000.0);
+				    view.printMessage("Tiempo de carga (seg): " + (end-start)/1000);
 
-				    view.printMessage("Total datos cargados: " + listaC.size() + "\n");
+				    view.printMessage("Total datos cargados: " + listaC.darTamano() + "\n");
 
-					view.printMessage("Primer dato: " + listaC.primeroNodo() + "\n");
+					view.printMessage("Primer dato: " + listaC.darPrimero().darElemento().toString() + "\n");
 				    
 				    
 					break;

@@ -4,16 +4,15 @@ import java.io.FileNotFoundException;
 import java.io.FileReader;
 import java.text.ParseException;
 import java.text.SimpleDateFormat;
-import java.util.ArrayList;
 import java.util.Date;
-import java.util.List;
 
 import com.google.gson.JsonArray;
 import com.google.gson.JsonElement;
 import com.google.gson.JsonParser;
 import com.google.gson.stream.JsonReader;
 
-import model.Comparendo;
+import model.data_structures.IQueue;
+import model.data_structures.Queue;
 
 /**
  * Definicion del modelo del mundo
@@ -21,16 +20,16 @@ import model.Comparendo;
  */
 public class Modelo {
 
-	private Cola<Comparendo> datosC;
+	private Queue<Comparendo> datosC;
 
-	public static String PATH = "./data/comparendos_dei_2018_small.geojson";
+	public static String PATH = "./data/comparendos_dei_2018.geojson";
 	//TODO: implementar los datos grandes
 	//	public static String PATH = "../../../../Datos-Material/2020-10/Proyecto1/comparendos_dei_2018.geojson";
 
 
 	public void cargarDatos() {
 
-		datosC = new Cola<Comparendo>();
+		datosC = new Queue<Comparendo>();
 
 		JsonReader reader;
 		try {
@@ -61,7 +60,7 @@ public class Modelo {
 						.get(1).getAsDouble();
 
 				Comparendo c = new Comparendo(OBJECTID, FECHA_HORA, DES_INFRAC, MEDIO_DETE, CLASE_VEHI, TIPO_SERVI, INFRACCION, LOCALIDAD, longitud, latitud);
-				datosC.enqueue(c);
+				datosC.enQueue(c);
 			}
 
 		}
@@ -73,7 +72,7 @@ public class Modelo {
 	}
 	
 	
-	public Cola<Comparendo> darDatosC()
+	public Queue<Comparendo> darDatosC()
 	{
 		return datosC;
 	}
