@@ -1,4 +1,4 @@
-package model;
+package model.logic;
 
 
 import java.util.Date;
@@ -15,7 +15,7 @@ public class Comparendo {
 
 	private double latitud;
 	private double longitud;
-
+	
 	public Comparendo(int objeId, Date fecha, String descripcion, String detencion, String claseVeh, String tipoSer, String codInfraccion, String localidadP, double lonP, double latP)
 	{
 		objectId = objeId;
@@ -29,7 +29,7 @@ public class Comparendo {
 		longitud = lonP;
 		latitud = latP;
 	}
-
+	
 	/**
 	 * @return the objectId
 	 */
@@ -99,11 +99,13 @@ public class Comparendo {
 	public double getLongitud() {
 		return longitud;
 	}
-
+	
 	@Override
 	public String toString() {
-		return ("OBJECTID =" + objectId + ", FECHA Y HORA =" + fecha_hora + ", INFRACCION =" + infraccion +
-				", CLASE VEHICULO=" + clase_vehi + ", TIPO SERVICIO" + tipo_servi + ", LOCALIDAD =" + localidad);
+		return "Comparendo [OBJECTID=" + objectId + ", FECHA_HORA=" + fecha_hora + ", DES_INFRAC=" + des_infrac
+				+ ", MEDIO_DETE=" + medio_dete + ", CLASE_VEHI=" + clase_vehi + ", TIPO_SERVI=" + tipo_servi
+				+ ", INFRACCION=" + infraccion + ", LOCALIDAD=" + localidad + ", latitud=" + latitud + ", longitud="
+				+ longitud + "]";
 	}
-
+	
 }

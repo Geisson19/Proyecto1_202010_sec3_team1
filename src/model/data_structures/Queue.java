@@ -1,55 +1,79 @@
 package model.data_structures;
 
+import model.logic.Comparendo;
 
-public class Queue<E> implements IQueue {
+public class Queue<T> implements IQueue<T> {
 
-	private Node<E> primero;
-
-	private Node<E> ultimo;
-
+	//Atributo
+	private Node<T> primero;
+	private Node<T> ultimo;
 	private int tamano;
 
-	public Queue()
-	{
-		ultimo = null;
-		primero = null;
+	//Constructor
+	public Queue() {
 		tamano = 0;
+		primero = null;
+		ultimo = null;
 	}
 
-	public void enqueue(E nuevo)
-	{
 
-		if(ultimo == null)
-		{
-			ultimo = new Node<>(nuevo);
-			primero = ultimo;
-		}
-		else
-		{
-			Node<E> nodo = new Node<>(nuevo);
-			ultimo.cambiarSiguiente(nodo);
-			ultimo = nodo;
+	public boolean estaVacia() {
+		return tamano == 0;
+	}
+
+	public int darTamano() {
+		return tamano;
+	}
+
+	public void enQueue(T pElemento) {
+		Node<T> nuevo = new Node(pElemento);
+
+		if (estaVacia()) {
+			primero = nuevo;
+			ultimo = nuevo;
+
+		} else {
+			ultimo.cambiarSiguiente(nuevo);
+			ultimo = nuevo;
+
 		}
 		tamano++;
 
 	}
 
-	public E dequeue()
-	{
-		if(estaVacia()){
+	public T deQueue() {
+		if (estaVacia()) {
+
 			return null;
-		}
-		else{
-			E toReturn = primero.darElemento();
+		} else {
+			T elemento = primero.darElemento();
 			primero = primero.darSiguiente();
 			tamano--;
-			return toReturn;
+			return elemento;
+		}
+
+
+	}
+
+	public T peek() {
+
+		if (estaVacia()) {
+			return null;
+
+		} else {
+			return primero.darElemento();
 		}
 	}
 
-	public Node<E> getIndex(int index)
+	// Metodos auxiliares
+
+	public Node darPrimero() {
+		return primero;
+	}
+
+	public Node<T> getIndex(int index)
 	{
-		Node<E> actual = primero;
+		Node<T> actual = primero;
 
 		if(index == 0)
 			return actual;
@@ -66,28 +90,5 @@ public class Queue<E> implements IQueue {
 		return actual;
 	}
 
-	public E primeroNodo()
-	{
-		if(estaVacia())
-			return null;
-		return primero.darElemento();
-	}
-
-	public E ultimoNodo()
-	{
-		if(estaVacia())
-			return null;
-		return ultimo.darElemento();
-	}
-
-	public int size()
-	{
-		return tamano;
-	}
-
-	public boolean estaVacia()
-	{
-		return tamano == 0;
-	}
 
 }
