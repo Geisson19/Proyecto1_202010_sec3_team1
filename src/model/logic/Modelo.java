@@ -348,6 +348,37 @@ public class Modelo {
         return toReturn;
     }
 
+    public Queue<String> localidades()
+    {
+        Queue<Comparendo> towork = copiarDatos();
+        Queue<String> toReturn = new Queue<String>();
+
+        Comparendo actual = null;
+
+        if(!towork.estaVacia()){
+            actual = towork.deQueue();
+            toReturn.enQueue(actual.getLocalidad());
+        }
+        while(!towork.estaVacia())
+        {
+            actual = towork.deQueue();
+            if(!estaEnCola(actual.getLocalidad(), toReturn))
+            {
+                toReturn.enQueue(actual.getLocalidad());
+            }
+        }
+        return toReturn;
+    }
+    public boolean estaEnCola(String localidad, Queue<String> colaa)
+    {
+        while(!colaa.estaVacia())
+        {
+            if(colaa.deQueue().equals(localidad))
+                return true;
+        }
+        return false;
+    }
+
 
     public void qicksort(Queue<Comparendo> S)
     {
