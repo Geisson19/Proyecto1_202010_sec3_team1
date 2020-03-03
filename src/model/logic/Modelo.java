@@ -21,7 +21,7 @@ public class Modelo {
 
 	private Cola<Comparendo> datosC;
 
-	public static String PATH = "./data/comparendos_dei_2018.geojson";
+	public static String PATH = "./data/comparendos_dei_2018_small.geojson";
 
 	public void cargarDatos() {
 
@@ -247,9 +247,27 @@ public class Modelo {
 		return null;
 	}
 
-	public Comparendo primerComparendoPorInfraccionDada(String pLocalidad)
+	//Requerimientos PARTE B
+	
+	//1B
+	public Comparendo primerComparendoPorInfraccionDada(String pInfraccion)
 	{
-		return null;
+		Cola<Comparendo> persistencia = copiarDatos();
+
+		Comparendo comparendoActual = null;
+		
+		boolean encontro = false;
+		
+		while(!persistencia.estaVacia() && !encontro)
+		{
+			
+			comparendoActual = persistencia.dequeue();
+			
+			if(comparendoActual.getInfraccion().equalsIgnoreCase(pInfraccion))
+				encontro = true;
+		
+		}
+		return encontro ? comparendoActual : null;
 	}
 	
 	public Cola<Comparendo> consultarComparendosPorInfraccion(String pFechaHora)
