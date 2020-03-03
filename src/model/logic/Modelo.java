@@ -1,9 +1,11 @@
 package model.logic;
 
-import java.io.FileNotFoundException;
+import
+        java.io.FileNotFoundException;
 import java.io.FileReader;
 import java.text.ParseException;
 import java.text.SimpleDateFormat;
+import java.util.ArrayList;
 import java.util.Date;
 
 import com.google.gson.JsonArray;
@@ -11,312 +13,383 @@ import com.google.gson.JsonElement;
 import com.google.gson.JsonParser;
 import com.google.gson.stream.JsonReader;
 
-import model.Comparendo;
+import model.data_structures.Node;
 import model.data_structures.Queue;
+
 
 /**
  * Definicion del modelo del mundo
- *
  */
 public class Modelo {
 
-	private Queue<Comparendo> datosC;
+    private Queue<Comparendo> datos;
 
-	public static String PATH = "./data/comparendos_dei_2018.geojson";
+    public static String PATH = "./data/comparendos_dei_2018.geojson";
 
-	public void cargarDatos() {
+    public void cargarDatos() {
 
-		datosC = new Queue<Comparendo>();
+        datos = new Queue<Comparendo>();
 
-		JsonReader reader;
-		try {
-			reader = new JsonReader(new FileReader(PATH));
-			JsonElement elem = JsonParser.parseReader(reader);
-			JsonArray e2 = elem.getAsJsonObject().get("features").getAsJsonArray();
+        JsonReader reader;
+        try {
+            reader = new JsonReader(new FileReader(PATH));
+            JsonElement elem = JsonParser.parseReader(reader);
+            JsonArray e2 = elem.getAsJsonObject().get("features").getAsJsonArray();
 
 
-			SimpleDateFormat parser=new SimpleDateFormat("yyyy/MM/dd");
+            SimpleDateFormat parser = new SimpleDateFormat("yyyy/MM/dd");
 
-			for(JsonElement e: e2) {
-				int OBJECTID = e.getAsJsonObject().get("properties").getAsJsonObject().get("OBJECTID").getAsInt();
+            for (JsonElement e : e2) {
+                int OBJECTID = e.getAsJsonObject().get("properties").getAsJsonObject().get("OBJECTID").getAsInt();
 
-				String s = e.getAsJsonObject().get("properties").getAsJsonObject().get("FECHA_HORA").getAsString();
-				Date FECHA_HORA = parser.parse(s);
+                String s = e.getAsJsonObject().get("properties").getAsJsonObject().get("FECHA_HORA").getAsString();
+                Date FECHA_HORA = parser.parse(s);
 
-				String MEDIO_DETE = e.getAsJsonObject().get("properties").getAsJsonObject().get("MEDIO_DETE").getAsString();
-				String CLASE_VEHI = e.getAsJsonObject().get("properties").getAsJsonObject().get("CLASE_VEHI").getAsString();
-				String TIPO_SERVI = e.getAsJsonObject().get("properties").getAsJsonObject().get("TIPO_SERVI").getAsString();
-				String INFRACCION = e.getAsJsonObject().get("properties").getAsJsonObject().get("INFRACCION").getAsString();
-				String DES_INFRAC = e.getAsJsonObject().get("properties").getAsJsonObject().get("DES_INFRAC").getAsString();
-				String LOCALIDAD = e.getAsJsonObject().get("properties").getAsJsonObject().get("LOCALIDAD").getAsString();
+                String MEDIO_DETE = e.getAsJsonObject().get("properties").getAsJsonObject().get("MEDIO_DETE").getAsString();
+                String CLASE_VEHI = e.getAsJsonObject().get("properties").getAsJsonObject().get("CLASE_VEHI").getAsString();
+                String TIPO_SERVI = e.getAsJsonObject().get("properties").getAsJsonObject().get("TIPO_SERVI").getAsString();
+                String INFRACCION = e.getAsJsonObject().get("properties").getAsJsonObject().get("INFRACCION").getAsString();
+                String DES_INFRAC = e.getAsJsonObject().get("properties").getAsJsonObject().get("DES_INFRAC").getAsString();
+                String LOCALIDAD = e.getAsJsonObject().get("properties").getAsJsonObject().get("LOCALIDAD").getAsString();
 
-				double longitud = e.getAsJsonObject().get("geometry").getAsJsonObject().get("coordinates").getAsJsonArray()
-						.get(0).getAsDouble();
+                double longitud = e.getAsJsonObject().get("geometry").getAsJsonObject().get("coordinates").getAsJsonArray()
+                        .get(0).getAsDouble();
 
-				double latitud = e.getAsJsonObject().get("geometry").getAsJsonObject().get("coordinates").getAsJsonArray()
-						.get(1).getAsDouble();
+                double latitud = e.getAsJsonObject().get("geometry").getAsJsonObject().get("coordinates").getAsJsonArray()
+                        .get(1).getAsDouble();
 
-				Comparendo c = new Comparendo(OBJECTID, FECHA_HORA, DES_INFRAC, MEDIO_DETE, CLASE_VEHI, TIPO_SERVI, INFRACCION, LOCALIDAD, longitud, latitud);
-				datosC.enqueue(c);
-			}
+                Comparendo c = new Comparendo(OBJECTID, FECHA_HORA, DES_INFRAC, MEDIO_DETE, CLASE_VEHI, TIPO_SERVI, INFRACCION, LOCALIDAD, longitud, latitud);
+                datos.enQueue(c);
+            }
 
-		}
-		catch (FileNotFoundException | ParseException e)
-		{
-			System.out.println(e.getMessage());
-			e.printStackTrace();
-		}
-	}
+        } catch (FileNotFoundException | ParseException e) {
+            System.out.println(e.getMessage());
+            e.printStackTrace();
+        }
+    }
 
 
-	public Queue<Comparendo> copiarDatos()
-	{
-		Queue<Comparendo> copia = new Queue<Comparendo>();
-		for(int i = 0; i<datosC.size(); i++)
-		{
-			copia.enqueue(datosC.getIndex(i).darElemento());
-		}
-		return copia;
-	}
+    public Queue<Comparendo> copiarDatos() {
+        Queue<Comparendo> copia = new Queue<>();
+        for (int i = 0; i < datos.darTamano(); i++) {
+            copia.enQueue(datos.getIndex(i).darElemento());
+        }
+        return copia;
+    }
+
+    public Queue<Comparendo> darDatosC() {
+        return datos;
+    }
 
-	public Queue<Comparendo> darDatosC()
-	{
-		return datosC;
-	}
 
-	public Comparendo buscarMayorComparendPorOBID()
-	{
-		Queue<Comparendo> persistencia = copiarDatos();
+    // Metodos al cargar datos
+    public Comparendo mayorObjectID() {
 
-		Comparendo comparendoActual = null;
+        Node actual = datos.darPrimero();
+        Comparendo mayor = (Comparendo) actual.darElemento();
 
-		int mayor = 0;
+        while (actual != null) {
+            Comparendo A = (Comparendo) actual.darElemento();
 
-		int actual = 0;
+            if (mayor.getObjectId() < A.getObjectId()) {
+                mayor = A;
+            }
+
+            actual = actual.darSiguiente();
+        }
+        return mayor;
+    }
+
+    public double mayorLatitud() {
+        Node actual = datos.darPrimero();
+        Comparendo mayor = (Comparendo) actual.darElemento();
+
+        while (actual != null) {
+            if (mayor.getLatitud() < ((Comparendo) actual.darElemento()).getLatitud()) {
+                mayor = (Comparendo) actual.darElemento();
+            }
+
+            actual = actual.darSiguiente();
+        }
+        return mayor.getLatitud();
+    }
+
+    public double menorLatitud() {
+        Node actual = datos.darPrimero();
+        Comparendo mayor = (Comparendo) actual.darElemento();
+
+        while (actual != null) {
+            if (mayor.getLatitud() > ((Comparendo) actual.darElemento()).getLatitud()) {
+                mayor = (Comparendo) actual.darElemento();
+            }
+
+            actual = actual.darSiguiente();
+        }
+        return mayor.getLatitud();
+    }
+
+    public double mayorLongitud() {
+        Node actual = datos.darPrimero();
+        Comparendo mayor = (Comparendo) actual.darElemento();
+
+        while (actual != null) {
+            if (mayor.getLongitud() < ((Comparendo) actual.darElemento()).getLongitud()) {
+                mayor = (Comparendo) actual.darElemento();
+            }
+
+            actual = actual.darSiguiente();
+        }
+        return mayor.getLongitud();
+    }
+
+    public double menorLongitud() {
+        Node actual = datos.darPrimero();
+        Comparendo mayor = (Comparendo) actual.darElemento();
+
+        while (actual != null) {
+            if (mayor.getLongitud() > ((Comparendo) actual.darElemento()).getLongitud()) {
+                mayor = (Comparendo) actual.darElemento();
+            }
 
-		Comparendo mayorComp = null;
+            actual = actual.darSiguiente();
+        }
+        return mayor.getLongitud();
+    }
+
+// Requerimientos Parte A
+
+    // Parte 1A: Consultar el primer comparendo que aparezca en el archivo que tiene una LOCALIDAD dada.
+
+    public Comparendo buscarPorLocalidad(String pLocalidad) throws Exception {
+        Node actual = datos.darPrimero();
+        Comparendo buscado = null;
+
+        while (actual != null) {
+            Comparendo A = (Comparendo) actual.darElemento();
+            if (A.getLocalidad().equals(pLocalidad)) {
+                buscado = A;
+            }
+            actual = actual.darSiguiente();
+        }
+        if (buscado == null) {
+            throw new Exception("No se encontro ningun comparendo con la localidad dada.");
+        } else {
+            return buscado;
+        }
+
+    }
 
-		while(!persistencia.estaVacia())
-		{
+    //Parte 2A: Consultar los comparendos registrados en el archivo dada una FECHA_HORA.
+
+    public Queue consultarPorFecha(Date pFecha) {
+        Node actual = datos.darPrimero();
+        Queue<Comparendo> cola = new Queue<>();
 
-			comparendoActual = persistencia.dequeue();
+        while (actual != null) {
+            Comparendo A = (Comparendo) actual.darElemento();
+            if (A.getFecha_hora().compareTo(pFecha) == 0) {
+                cola.enQueue(A);
+            }
+            actual = actual.darSiguiente();
+        }
+        Node ac = cola.darPrimero();
+        while (ac != null) {
+            Comparendo A = (Comparendo) ac.darElemento();
+            Comparendo ASig = (Comparendo) ac.darSiguiente().darElemento();
+
+            if (A.getInfraccion().compareTo(ASig.getInfraccion()) < 0) {
+                Comparendo temp = (Comparendo) ac.darElemento();
+                ac.cambiarElemento(ASig);
+                ac.darSiguiente().cambiarElemento(temp);
+            }
+            ac = ac.darSiguiente();
+        }
+        return cola;
+    }
 
-			actual = comparendoActual.getObjectId();
+    // Parte 3A: Comparar los comparendos, por cada código INFRACCION, en dos FECHA_HORA dadas.
+    // Generar cola con los comparendos que tienen registros en alguna fecha que entra por parametro.
 
-			if(actual > mayor)
-			{
+    public Queue darColaInfraccion(Date pFecha1, Date pFecha2) {
 
-				mayor = actual;
-				mayorComp = comparendoActual;
+        Node actual = datos.darPrimero();
+        Queue<Comparendo> cola = new Queue();
 
-			}
+        while (actual != null) {
+            Comparendo A = (Comparendo) actual.darElemento();
 
-		}
+            if (A.getFecha_hora().equals(pFecha1) || A.getFecha_hora().equals(pFecha2)) {
+                cola.enQueue(A);
+            }
 
-		return mayorComp;
+            actual = actual.darSiguiente();
+        }
 
-	}
+        return cola;
+    }
 
-	public double mayorLatitud()
-	{
-		Queue<Comparendo> persistencia = copiarDatos();
+    public void ordenarAlfabeticamenteCola3A(Queue cola) {
 
-		Comparendo comparendoActual = null;
+        Node actual = cola.darPrimero();
 
-		double mayor = 0;
+        while (actual != null) {
+            Comparendo A = (Comparendo) actual.darElemento();
+            Comparendo ASig = (Comparendo) actual.darSiguiente().darElemento();
 
-		double actual = 0;
+            if (A.getInfraccion().compareToIgnoreCase(ASig.getInfraccion()) < 0) {
+                Comparendo temp = (Comparendo) actual.darElemento();
+                actual.cambiarElemento(ASig);
+                actual.darSiguiente().cambiarElemento(temp);
+            }
 
-		while(!persistencia.estaVacia())
-		{
 
-			comparendoActual = persistencia.dequeue();
+            actual = actual.darSiguiente();
+        }
 
-			actual = comparendoActual.getLatitud();
+    }
 
-			if(actual > mayor)
-			{
+    public ArrayList metodo3A(Queue colaOrdenada, Date pFecha1, Date pFecha2) {
 
-				mayor = actual;
+        Node actual = colaOrdenada.darPrimero();
+        Comparendo infra = (Comparendo) actual.darElemento();
+        String infraccion = infra.getInfraccion();
+        int numeroFecha1 = 0;
+        int numeroFecha2 = 0;
+        ArrayList listaFinal = new ArrayList();
 
-			}
 
-		}
-		return mayor;
+        while (actual != null) {
+            Comparendo A = (Comparendo) actual.darElemento();
+            if (infraccion.equals(A.getInfraccion())) {
 
-	}
+                String[] lista = null;
 
-	public double menorLatitud()
-	{
-		Queue<Comparendo> persistencia = copiarDatos();
+                if (A.getFecha_hora().equals(pFecha1)) {
+                    numeroFecha1++;
+                }
+                if (A.getFecha_hora().equals(pFecha2)) {
+                    numeroFecha2++;
+                }
 
-		Comparendo comparendoActual = null;
+                lista[0] = A.getInfraccion();
+                lista[1] = String.valueOf(numeroFecha1);
+                lista[2] = String.valueOf(numeroFecha2);
 
-		double menor = 0;
+                listaFinal.add(lista);
 
-		double actual = 0;
+            } else {
+                infraccion = A.getInfraccion();
+                numeroFecha1 = 0;
+                numeroFecha2 = 0;
 
-		while(!persistencia.estaVacia())
-		{
+                String[] lista = null;
 
-			comparendoActual = persistencia.dequeue();
+                if (A.getFecha_hora().equals(pFecha1)) {
+                    numeroFecha1++;
+                }
+                if (A.getFecha_hora().equals(pFecha2)) {
+                    numeroFecha2++;
+                }
 
-			actual = comparendoActual.getLatitud();
+                lista[0] = A.getInfraccion();
+                lista[1] = String.valueOf(numeroFecha1);
+                lista[2] = String.valueOf(numeroFecha2);
 
-			if(actual < menor)
-			{
+                listaFinal.add(lista);
 
-				menor = actual;
+            }
 
-			}
+            actual = actual.darSiguiente();
+        }
+        return listaFinal;
+    }
 
-		}
-		return menor;
 
-	}
 
-	public double mayorLongitud()
-	{
-		Queue<Comparendo> persistencia = copiarDatos();
+    //Requerimientos PARTE B
 
-		Comparendo comparendoActual = null;
+    //1B
+    public Comparendo primerComparendoPorInfraccionDada(String pInfraccion)
+    {
+        Queue<Comparendo> persistencia = copiarDatos();
 
-		double mayor = 0;
+        Comparendo comparendoActual = null;
 
-		double actual = 0;
+        boolean encontro = false;
 
-		while(!persistencia.estaVacia())
-		{
+        while(!persistencia.estaVacia() && !encontro)
+        {
 
-			comparendoActual = persistencia.dequeue();
+            comparendoActual = persistencia.deQueue();
 
-			actual = comparendoActual.getLongitud();
+            if(comparendoActual.getInfraccion().equalsIgnoreCase(pInfraccion))
+                encontro = true;
 
-			if(actual > mayor)
-			{
+        }
+        return encontro ? comparendoActual : null;
+    }
 
-				mayor = actual;
 
-			}
-
-		}
-		return mayor;
-
-	}
-
-	public double menorLongitud()
-	{
-		Queue<Comparendo> persistencia = copiarDatos();
-
-		Comparendo comparendoActual = null;
-
-		double menor = 0;
-
-		double actual = 0;
-
-		while(!persistencia.estaVacia())
-		{
-
-			comparendoActual = persistencia.dequeue();
-
-			actual = comparendoActual.getLongitud();
-
-			if(actual < menor)
-			{
-
-				menor = actual;
-
-			}
-
-		}
-		return menor;
-
-	}
-
-
-	//Requerimientos PARTE B
-
-	//1B
-	public Comparendo primerComparendoPorInfraccionDada(String pInfraccion)
-	{
-		Queue<Comparendo> persistencia = copiarDatos();
-
-		Comparendo comparendoActual = null;
-
-		boolean encontro = false;
-
-		while(!persistencia.estaVacia() && !encontro)
-		{
-
-			comparendoActual = persistencia.dequeue();
-
-			if(comparendoActual.getInfraccion().equalsIgnoreCase(pInfraccion))
-				encontro = true;
-
-		}
-		return encontro ? comparendoActual : null;
-	}
-
-
-	//2B
-	public Queue<Comparendo> darComparendosEnOrdenCronologico(String infraccion)
-	{
-		Comparendo actual = null;
-		Queue<Comparendo> copia = copiarDatos();
-		Queue<Comparendo> toReturn = new Queue<Comparendo>();
-		while(!copia.estaVacia())
-		{
-			actual = copia.dequeue();
-			if(actual.getInfraccion().equalsIgnoreCase(infraccion))
-			{
-				toReturn.enqueue(actual);
-			}
-		}
+    //2B
+    public Queue<Comparendo> darComparendosEnOrdenCronologico(String infraccion)
+    {
+        Comparendo actual = null;
+        Queue<Comparendo> copia = copiarDatos();
+        Queue<Comparendo> toReturn = new Queue<Comparendo>();
+        while(!copia.estaVacia())
+        {
+            actual = copia.deQueue();
+            if(actual.getInfraccion().equalsIgnoreCase(infraccion))
+            {
+                toReturn.enQueue(actual);
+            }
+        }
 //		qicksort(toReturn);
-		return toReturn;
-	}
+        return toReturn;
+    }
 
 
-	public void qicksort(Queue<Comparendo> S)
-	{
-		int n = S.size();
+    public void qicksort(Queue<Comparendo> S)
+    {
+        int n = S.darTamano();
 
-		if(n<2) return;
+        if(n<2) return;
 
-		//divide
+        //divide
 
-		Comparendo pivot = S.primeroNodo();
+        Comparendo pivot = (Comparendo) S.darPrimero().darElemento();
 
-		Queue<Comparendo> L = new Queue<Comparendo>();
-		Queue<Comparendo> E = new Queue<Comparendo>();
-		Queue<Comparendo> G = new Queue<Comparendo>();
+        Queue<Comparendo> L = new Queue<Comparendo>();
+        Queue<Comparendo> E = new Queue<Comparendo>();
+        Queue<Comparendo> G = new Queue<Comparendo>();
 
 
-		while(!S.estaVacia())
-		{
-			Comparendo elemental = S.dequeue();
-			int c = elemental.getFecha_hora().compareTo(pivot.getFecha_hora());
-			if(c<0)
-				L.enqueue(elemental);
-			else if (c == 0)
-			{
-				E.enqueue(elemental);
-			}
-			else
-			{
-				G.enqueue(elemental);
-			}
-		}
+        while(!S.estaVacia())
+        {
+            Comparendo elemental = S.deQueue();
+            int c = elemental.getFecha_hora().compareTo(pivot.getFecha_hora());
+            if(c<0)
+                L.enQueue(elemental);
+            else if (c == 0)
+            {
+                E.enQueue(elemental);
+            }
+            else
+            {
+                G.enQueue(elemental);
+            }
+        }
 
-		qicksort(L);
-		qicksort(G);
+        qicksort(L);
+        qicksort(G);
 
-		while(!L.estaVacia())
-			S.enqueue(L.dequeue());
-		while(!E.estaVacia())
-			S.enqueue(E.dequeue());
-		while(!G.estaVacia())
-			S.enqueue(G.dequeue());
-	}
+        while(!L.estaVacia())
+            S.enQueue(L.deQueue());
+        while(!E.estaVacia())
+            S.enQueue(E.deQueue());
+        while(!G.estaVacia())
+            S.enQueue(G.deQueue());
+    }
 
 }
+
